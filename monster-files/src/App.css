@@ -1,0 +1,26 @@
+.monster {
+  margin:20px;
+  background-color: grey;
+  float:left;
+  padding: 10px;
+  border:2px solid black;
+}
+.monster h2 {
+  color: white;
+}
+.monster p {
+  margin:0;
+  color:white;
+}
+.add_monster {
+  position: fixed;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  padding: 15px;
+  border: 0;
+  background-color: rgb(208, 139, 47);
+  color: white;
+  cursor: pointer;
+}
