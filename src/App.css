@@ -4,6 +4,7 @@
   float:left;
   padding: 10px;
   border:2px solid black;
+  transition: 0.25s;
 }
 .monster h2 {
   color: white;
@@ -12,6 +13,21 @@
   margin:0;
   color:white;
 }
+
+.details_toolbar {
+  position: absolute;
+  top: 0;
+  right: 0;
+  font-size: 18px;
+  font-weight: bold;
+  color: white;
+  cursor: pointer;
+  padding: 4px 8px;
+}
+.details_toolbar span {
+  padding: 4px;
+}
+
 .add_monster {
   position: fixed;
   bottom: 0;

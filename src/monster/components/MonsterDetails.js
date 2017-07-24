@@ -5,10 +5,16 @@ export class MonsterDetails extends Component {
   state = {
     toggleEdit: false,
   }
+  handleOnEdit = () => {
+    this.setState({
+      toggleEdit: true,
+    });
+  }
+
   render() {
     if(!this.state.toggleEdit) {
       return(
-        <div className="monster_details">
+        <div className="monster details">
           <h2> { this.props.name } </h2>
           <p>DF: { this.props.dungeon_floor } </p>
           <p>Challenge: { this.props.challenge } </p>
@@ -26,6 +32,12 @@ export class MonsterDetails extends Component {
           <p>Movement_speed: { this.props.movement_speed } </p>
           <p>Dmg: { this.props.dmg } </p>
           <p>Trefferrate: { this.props.trefferrate } </p>
+
+          <div className="details_toolbar">
+            <span onClick={this.handleOnEdit}>b</span>
+            <span onClick={this.props.handleOnClose}>x</span>
+          </div>
+
         </div>
       );
     } else {

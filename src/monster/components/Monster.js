@@ -6,10 +6,22 @@ export class Monster extends Component  {
     toggleDetails: false,
   }
 
+  handleOnClick = () => {
+    this.setState({
+      toggleDetails: true,
+    });
+  }
+
+  handleOnClose = () => {
+    this.setState({
+      toggleDetails: false,
+    });
+  }
+
   render()  {
     if(!this.state.toggleDetails) {
       return (
-        <div className="monster">
+        <div className="monster" onClick={this.handleOnClick}>
           <h2> { this.props.name } </h2>
           <p>DF: { this.props.dungeon_floor } </p>
           <p>Challenge: { this.props.challenge } </p>
@@ -41,6 +53,8 @@ export class Monster extends Component  {
           movement_speed={this.props.movement_speed}
           dmg={this.props.dmg}
           trefferrate={this.props.trefferrate}
+
+          handleOnClose={this.handleOnClose}
         />
       );
     }
