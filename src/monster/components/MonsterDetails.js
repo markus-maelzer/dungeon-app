@@ -5,10 +5,26 @@ export class MonsterDetails extends Component {
   state = {
     toggleEdit: false,
   }
-  handleOnEdit = () => {
-    this.setState({
-      toggleEdit: true,
-    });
+
+  handleToggleEdit = () => {
+    this.toggleEdit();
+  }
+
+  handleEditMonsterSubmit = (monster) => {
+    this.props.onFormSubmit(monster);
+    this.toggleEdit();
+  }
+
+  toggleEdit = () => {
+    if (!this.state.toggleEdit) {
+      this.setState({
+        toggleEdit: true,
+      });
+    } else {
+      this.setState({
+        toggleEdit: false,
+      });
+    }
   }
 
   render() {
@@ -34,8 +50,8 @@ export class MonsterDetails extends Component {
           <p>Trefferrate: { this.props.trefferrate } </p>
 
           <div className="details_toolbar">
-            <span onClick={this.handleOnEdit}>b</span>
-            <span onClick={this.props.handleOnClose}>x</span>
+            <span onClick={this.handleToggleEdit}>b</span>
+            <span onClick={this.props.handleToggleDetails}>x</span>
           </div>
 
         </div>
@@ -65,6 +81,9 @@ export class MonsterDetails extends Component {
           movement_speed={this.props.movement_speed}
           dmg={this.props.dmg}
           trefferrate={this.props.trefferrate}
+
+          handleToggleEdit={this.handleToggleEdit}
+          onFormSubmit={this.handleEditMonsterSubmit}
         />
       );
     }

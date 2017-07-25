@@ -11,7 +11,7 @@ export class MonsterList extends Component {
     const monsterList = this.props.monsterList.map((monster, i) => {
       return (
         <Monster
-          id={i}
+          id={monster.id}
           key={i}
           name={monster.name}
           dungeon_floor={monster.dungeon_floor}
@@ -34,6 +34,8 @@ export class MonsterList extends Component {
           movement_speed={monster.movement_speed}
           dmg={monster.dmg}
           trefferrate={monster.trefferrate}
+
+          onFormSubmit={this.props.onFormSubmit}
         />
       )
     });

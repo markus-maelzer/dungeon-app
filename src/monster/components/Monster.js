@@ -6,22 +6,22 @@ export class Monster extends Component  {
     toggleDetails: false,
   }
 
-  handleOnClick = () => {
-    this.setState({
-      toggleDetails: true,
-    });
-  }
-
-  handleOnClose = () => {
-    this.setState({
-      toggleDetails: false,
-    });
+  handleToggleDetails = () => {
+    if (!this.state.toggleDetails) {
+      this.setState({
+        toggleDetails: true,
+      });
+    } else {
+      this.setState({
+        toggleDetails: false,
+      });
+    }
   }
 
   render()  {
     if(!this.state.toggleDetails) {
       return (
-        <div className="monster" onClick={this.handleOnClick}>
+        <div className="monster" onClick={this.handleToggleDetails}>
           <h2> { this.props.name } </h2>
           <p>DF: { this.props.dungeon_floor } </p>
           <p>Challenge: { this.props.challenge } </p>
@@ -54,7 +54,8 @@ export class Monster extends Component  {
           dmg={this.props.dmg}
           trefferrate={this.props.trefferrate}
 
-          handleOnClose={this.handleOnClose}
+          handleToggleDetails={this.handleToggleDetails}
+          onFormSubmit={this.props.onFormSubmit}
         />
       );
     }
