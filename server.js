@@ -18,6 +18,11 @@ const MONSTER_DATA = path.join(__dirname , 'data/monster.json');
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+
+server.listen(port, function () {
+  console.log('Server not running on port: ' + port);
+});
+
 /*
 app.use((req, res, next) => {
   res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
@@ -29,12 +34,10 @@ app.use((req, res, next) => {
 
 app.get('/api/monster', (req, res) => {
   fs.readFile(MONSTER_DATA, (err, data) => {
-    console.log("data: " + JSON.parse(data));
     res.setHeader('Cache-Control', 'no-cache');
     res.json(JSON.parse(data));
   });
 });
-
 
 app.post('/api/monster', (req, res) => {
   fs.readFile(MONSTER_DATA, (err, data) => {
@@ -72,13 +75,38 @@ app.post('/api/monster', (req, res) => {
   });
 });
 
-server.listen(port, function () {
-  console.log('Server not running on port: ' + port);
+app.put('/api/monster', (req, res) => {
+  fs.readFile(MONSTER_DATA, (err, data) => {
+    const monster = JSON.parse(data);
+    monster.forEach((monster) => {
+      if (monster.id === req.body.id) {
+        monster.name = req.body.name;
+        monster.größe = req.body.größe;
+        monster.beschreibung = req.body.beschreibung;
+        monster.waffen = req.body.waffen;
+        monster.besonderheiten = req.body.besonderheiten;
+        monster.dungeon_floor = req.body.dungeon_floor;
+        monster.challenge = req.body.challenge;
+        monster.leben = req.body.leben;
+        monster.zäheit = req.body.zäheit;
+        monster.resistenzen = req.body.resistenzen;
+        monster.schwäche = req.body.schwäche;
+        monster.immunitäten = req.body.immunitäten;
+        monster.rüstung = req.body.rüstung;
+        monster.skills = req.body.skills;
+        monster.movement_speed = req.body.movement_speed;
+        monster.dmg = req.body.dmg;
+        monster.trefferrate = req.body.trefferrate;
+      }
+    });
+    fs.writeFile(MONSTER_DATA, JSON.stringify(monster, null, 2), () => {
+      res.json({});
+    });
+  });
 });
+
+
 
 io.on('connection', () => {
   console.log('a user has connected');
-
-
-
 })
