@@ -40,3 +40,9 @@
   color: white;
   cursor: pointer;
 }
+.search_bar {
+  position: fixed;
+  top: 0;
+  right: 0;
+  height: 50px;
+}

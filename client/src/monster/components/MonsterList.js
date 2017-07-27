@@ -3,6 +3,11 @@ import { Monster } from './Monster';
 
 export class MonsterList extends Component {
 
+  componentWillReceiveProps(nextProps) {
+    console.log(nextProps);
+  }
+
+
   handleMonsterOpen = (e) => {
     console.log(e.target);
   }
@@ -26,7 +31,7 @@ export class MonsterList extends Component {
           resistenzen={monster.resistenzen}
           immunitäten={monster.immunitäten}
 
-          größe={monster.beschreibung}
+          größe={monster.größe}
           beschreibung={monster.beschreibung}
           besonderheiten={monster.besonderheiten}
 

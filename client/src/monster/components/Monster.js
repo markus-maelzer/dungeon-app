@@ -45,7 +45,7 @@ export class Monster extends Component  {
           resistenzen={this.props.resistenzen}
           immunitäten={this.props.immunitäten}
 
-          größe={this.props.beschreibung}
+          größe={this.props.größe}
           beschreibung={this.props.beschreibung}
           besonderheiten={this.props.besonderheiten}
 

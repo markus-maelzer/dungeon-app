@@ -1,15 +1,26 @@
 import React, { Component } from 'react';
 import { MonsterList } from './components/MonsterList';
 import { ToggleCreateMonsterForm } from './components/ToggleCreateMonsterForm';
+import { SortMonsters } from './components/SortMonsters';
+
 import Client from '../Client';
+
 
 class MonsterContainer extends Component {
   state = {
-    monsterList: []
+    monsterList: [],
+    filteredMonsterList: []
   }
 
   componentDidMount() {
     this.loadMonsters();
+  }
+  shouldComponentUpdate(nextState) {
+    console.log(this.state.monsterList);
+    return true;
+  }
+  componentDidUpdate() {
+
   }
 
   handleEditFormSubmit = (monster) => {
@@ -23,11 +34,13 @@ class MonsterContainer extends Component {
   // load Monsters from Data
   loadMonsters = () => {
     Client.getMonsters((serverMonsterList) => {
-      this.setState({ monsterList: serverMonsterList })
+      this.setState({
+        monsterList: serverMonsterList,
+        filteredMonsterList: serverMonsterList
+      })
     })
   }
 
-  // create monster
   createMonster = (monster) => {
     // set state of monsterList for react
     this.setState({
@@ -38,6 +51,8 @@ class MonsterContainer extends Component {
   }
 
   updateMonsterList = (monster) => {
+    //var newMonsterList =
+    // try to make map into a variable
     this.setState({
       monsterList: this.state.monsterList.map((monsterData) => {
         //check if id exists and then update the monster with the same id
@@ -73,16 +88,29 @@ class MonsterContainer extends Component {
   }
 
 
+  // sort and Filter Functions
+  searchForMonster = (data) => {
+    this.setState({
+      filteredMonsterList: data
+    })
+  }
+
+
 
   render() {
     return (
       <div className="monster-container">
         <MonsterList
-          monsterList={this.state.monsterList}
+          monsterList={this.state.filteredMonsterList}
+          initialMonsterList={this.state.monsterList}
           onFormSubmit={this.handleEditFormSubmit}
          />
         <ToggleCreateMonsterForm
           onFormSubmit={this.handleCreateFormSubmit}
+        />
+        <SortMonsters
+          searchForMonster={this.searchForMonster}
+          initialItems={this.state.monsterList}
         />
       </div>
     );
