@@ -19,9 +19,11 @@ export class CreateMonsterForm extends Component {
     beschreibung: this.props.beschreibung || '',
     besonderheiten: this.props.besonderheiten || '',
     skills: this.props.skills || '',
+    skill_multiplikator: this.props.skill_multiplikator || '',
     movement_speed: this.props.movement_speed || '',
-    dmg: this.props.dmg || '',
+    dmg_multiplikator: this.props.dmg_multiplikator || '',
     trefferrate: this.props.trefferrate || '',
+
   }
 
   static defaultProps = {
@@ -29,7 +31,7 @@ export class CreateMonsterForm extends Component {
       'name', 'dungeon_floor', 'challenge', 'leben',
       'waffen', 'rüstung', 'zäheit', 'schwäche', 'resistenzen',
       'immunitäten', 'größe', 'beschreibung', 'besonderheiten',
-      'skills', 'movement_speed', 'dmg', 'trefferrate'
+      'skills', 'skill_multiplikator', 'movement_speed', 'dmg_multiplikator', 'trefferrate'
     ]
   }
 

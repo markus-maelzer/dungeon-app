@@ -62,6 +62,7 @@ app.post('/api/monster', (req, res) => {
       besonderheiten: req.body.besonderheiten,
 
       skills: req.body.skills,
+      skill_multiplikator: req.body.skill_multiplikator,
       movement_speed: req.body.movement_speed,
       dmg: req.body.dmg,
       trefferrate: req.body.trefferrate,
@@ -94,6 +95,7 @@ app.put('/api/monster', (req, res) => {
         monster.immunitäten = req.body.immunitäten;
         monster.rüstung = req.body.rüstung;
         monster.skills = req.body.skills;
+        monster.skill_multiplikator = req.body.skill_multiplikator;
         monster.movement_speed = req.body.movement_speed;
         monster.dmg = req.body.dmg;
         monster.trefferrate = req.body.trefferrate;

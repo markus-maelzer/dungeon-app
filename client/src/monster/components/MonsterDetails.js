@@ -46,8 +46,9 @@ export class MonsterDetails extends Component {
           <p>Beschreibung: { this.props.beschreibung } </p>
           <p>Besonderheiten: { this.props.besonderheiten } </p>
           <p>Skills: { this.props.skills } </p>
-          <p>Movement_speed: { this.props.movement_speed } </p>
-          <p>Dmg: { this.props.dmg } </p>
+          <p>Skill Multiplikator: {this.props.skill_multiplikator}</p>
+          <p>Movement Speed: { this.props.movement_speed } </p>
+          <p>Dmg Multiplikator: { this.props.dmg_multiplikator } </p>
           <p>Trefferrate: { this.props.trefferrate } </p>
 
           <div className="details_toolbar">
@@ -79,8 +80,9 @@ export class MonsterDetails extends Component {
           besonderheiten={this.props.besonderheiten}
 
           skills={this.props.skills}
+          skill_multiplikator={this.props.skill_multiplikator}
           movement_speed={this.props.movement_speed}
-          dmg={this.props.dmg}
+          dmg_multiplikator={this.props.dmg_multiplikator}
           trefferrate={this.props.trefferrate}
 
           handleToggleEdit={this.handleToggleEdit}

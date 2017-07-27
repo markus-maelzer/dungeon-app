@@ -50,8 +50,9 @@ export class Monster extends Component  {
           besonderheiten={this.props.besonderheiten}
 
           skills={this.props.skills}
+          skill_multiplikator={this.props.skill_multiplikator}
           movement_speed={this.props.movement_speed}
-          dmg={this.props.dmg}
+          dmg_multiplikator={this.props.dmg_multiplikator}
           trefferrate={this.props.trefferrate}
 
           handleToggleDetails={this.handleToggleDetails}

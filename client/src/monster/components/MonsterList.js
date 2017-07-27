@@ -36,9 +36,11 @@ export class MonsterList extends Component {
           besonderheiten={monster.besonderheiten}
 
           skills={monster.skills}
+          skill_multiplikator={monster.skill_multiplikator}
           movement_speed={monster.movement_speed}
-          dmg={monster.dmg}
+          dmg_multiplikator={monster.dmg_multiplikator}
           trefferrate={monster.trefferrate}
+
 
           onFormSubmit={this.props.onFormSubmit}
         />

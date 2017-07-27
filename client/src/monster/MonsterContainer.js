@@ -73,8 +73,9 @@ class MonsterContainer extends Component {
             immunitäten: monster.data.immunitäten,
             rüstung: monster.data.rüstung,
             skills: monster.data.skills,
+            skill_multiplikator: monster.data.skill_multiplikator,
             movement_speed: monster.data.movement_speed,
-            dmg: monster.data.dmg,
+            dmg_multiplikator: monster.data.dmg_multiplikator,
             trefferrate: monster.data.trefferrate,
           });
         // else just return the same monster data the loop was outputing
