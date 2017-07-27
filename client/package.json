@@ -16,10 +16,5 @@
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
   },
-  "proxy": {
-    "/socket.io": {
-      "target": "ws://localhost:3001",
-      "ws": true
-    }
-  }
+  "proxy": "http://localhost:3001"
 }

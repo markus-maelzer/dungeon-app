@@ -1,51 +1,15 @@
 import React, { Component } from 'react';
 import { MonsterList } from './components/MonsterList';
 import { ToggleCreateMonsterForm } from './components/ToggleCreateMonsterForm';
+import Client from '../Client';
 
 class MonsterContainer extends Component {
   state = {
-    monsterList: [
-      {
-        id: 1,
-        name: 'Goblin',
-        größe: '20cm',
-        beschreibung:'asdf' ,
-        waffen: 'nix' ,
-        besonderheiten:'nix' ,
-        dungeon_floor:'nix' ,
-        challenge:'nix' ,
-        leben: '50',
-        zäheit:'nix' ,
-        resistenzen:'nix' ,
-        schwäche: 'nix',
-        immunitäten: 'nix',
-        rüstung:'nix' ,
-        skills:'nix' ,
-        movement_speed: 'nix',
-        dmg: 'nix',
-        trefferrate: 'nix',
-      },
-      {
-        id: 2,
-        name: 'Ork',
-        größe: '20cm',
-        beschreibung:'asdf' ,
-        waffen: 'nix' ,
-        besonderheiten:'nix' ,
-        dungeon_floor:'nix' ,
-        challenge:'nix' ,
-        leben: '150',
-        zäheit:'nix' ,
-        resistenzen:'nix' ,
-        schwäche: 'nix',
-        immunitäten: 'nix',
-        rüstung:'nix' ,
-        skills:'nix' ,
-        movement_speed: 'nix',
-        dmg: 'nix',
-        trefferrate: 'nix',
-      },
-    ]
+    monsterList: []
+  }
+
+  componentDidMount() {
+    this.loadMonsters();
   }
 
   handleEditFormSubmit = (monster) => {
@@ -56,15 +20,23 @@ class MonsterContainer extends Component {
     this.createMonster(monster);
   }
 
+// load Monsters from Data
+  loadMonsters = () => {
+    Client.getMonsters((serverMonsterList) => {
+      console.log(serverMonsterList);
+      this.setState({ monsterList: serverMonsterList })
+    })
+  }
+
   createMonster = (monster) => {
       console.log(monster);
     this.setState({
       monsterList: this.state.monsterList.concat(monster.data),
     })
+    Client.createMonster(monster.data);
   }
 
   updateMonsterList = (monster) => {
-    console.log(monster.data);
     this.setState({
       monsterList: this.state.monsterList.map((monsterData) => {
         if (monster.data.id === monsterData.id) {
@@ -93,6 +65,7 @@ class MonsterContainer extends Component {
         }
       }),
     });
+    Client.updateMonster(monster.data);
   }
 
 
