@@ -1,13 +1,18 @@
-.monster-list-container{
-  width: 100%;
-  height: 100%;
+.monster-container {
+  padding: 50px 0;
 }
+
+.monster-container .monster-list-container {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  align-items: start;
+}
+
 .monster {
   background-color: var(--mcl);
+  color: white;
   transition: 0.25s;
-  width: 32%;
-  min-width: 250px;
-  max-width: 400px;
   height: auto;
   border: 2px solid #270c53;
   border-radius: 15px;
@@ -15,37 +20,41 @@
   padding: 15px 10px;
   float: left;
 }
-.monster h2{
+
+.monster h2 {
   font-family: 'Kumar One', cursive;
   font-size: 40px;
+}
+
+.monster h2, .monster h3 {
   text-align: center;
-  color: white;
 }
-.moster h3, .monster p, .form, .create_monster{
+
+.monster p {
   font-size: 16px;
-  color:white;
-  font-family: 'Roboto', sans-serif;
 }
-.form div, .create_monster div{
+
+.form .category {
   margin-bottom: 2px;
 }
-.form h3, .create_monster h3{
-  text-align: center;
-}
-.form div:first-child h3, .create_monster div:first-child h3{
+
+.form .category:first-child {
   margin-top: 15px;
 }
-.form input, .create_monster input{
+
+.form .category input {
   width: 100%;
   border: none;
   outline: none;
   height: 23px;
   transition: 0.25s;
 }
-div input:focus{
+
+.form .category input:focus {
   background-color: #a7e49d;
 }
-.form button, .create_monster button{
+
+.form button {
   position: relative;
   width: 25%;
   left: 50%;
@@ -57,11 +66,15 @@ div input:focus{
   border: 2px solid #270c53;
   border-radius: 15px;
   background-color: #fff;
-  color: #270c53;
+  color: var(--mcl2);
   cursor: pointer;
   transition: 0.25s;
 }
 
+.form button:hover {
+  background-color: var(--mcl2);
+  color: white;
+}
 
 .details_toolbar {
   position: absolute;
@@ -73,6 +86,7 @@ div input:focus{
   color: white;
   cursor: pointer;
 }
+
 .details_toolbar span {
   padding: 0 4px;
 }
@@ -91,12 +105,15 @@ div input:focus{
   cursor: pointer;
   transition: 0.25s;
 }
-.add_monster:hover{
+
+.add_monster:hover {
   background-color: var(--mcl2);
 }
+
 .search_bar {
   position: fixed;
   top: 0;
-  right: 0;
+  width: 100%;
   height: 50px;
+  background-color: var(--mcl);
 }

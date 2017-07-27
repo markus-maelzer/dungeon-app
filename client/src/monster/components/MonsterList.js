@@ -3,15 +3,6 @@ import { Monster } from './Monster';
 
 export class MonsterList extends Component {
 
-  componentWillReceiveProps(nextProps) {
-    console.log(nextProps);
-  }
-
-
-  handleMonsterOpen = (e) => {
-    console.log(e.target);
-  }
-
   render() {
     const monsterList = this.props.monsterList.map((monster, i) => {
       return (
@@ -40,7 +31,6 @@ export class MonsterList extends Component {
           movement_speed={monster.movement_speed}
           dmg_multiplikator={monster.dmg_multiplikator}
           trefferrate={monster.trefferrate}
-
 
           onFormSubmit={this.props.onFormSubmit}
         />

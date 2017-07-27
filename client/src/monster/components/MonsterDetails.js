@@ -31,7 +31,7 @@ export class MonsterDetails extends Component {
   render() {
     if(!this.state.toggleEdit) {
       return(
-        <div className="monster details">
+        <div className="monster monster-details">
           <h2> { this.props.name } </h2>
           <p>DF: { this.props.dungeon_floor } </p>
           <p>Challenge: { this.props.challenge } </p>

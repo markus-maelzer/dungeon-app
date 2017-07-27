@@ -39,7 +39,6 @@ export class CreateMonsterForm extends Component {
     this.setState({
       [data]: e.target.value,
     });
-    console.log(data);
   }
 
   handleSubmit = () => {
@@ -68,7 +67,7 @@ export class CreateMonsterForm extends Component {
   render() {
     const inputs = this.props.categorys.map((category, i) => {
       return (
-        <div key={i}>
+        <div key={i} className='category'>
           <h3>{category}</h3>
           <input type='text' value={this.state[category]}
             onChange={this.handleInputChange(category)}
@@ -78,8 +77,9 @@ export class CreateMonsterForm extends Component {
     });
 
     const buttonText = this.props.id ? 'Update' : 'Create';
+    const className = this.props.className || 'updateMonster';
     return(
-      <div className={"monster " + this.props.className}>
+      <div className={"monster monster-details form " + className}>
         {inputs}
 
         <button

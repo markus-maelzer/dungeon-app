@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 import './css/index.css';
-import './css/App.css';
+import './css/monster.css';
 
 import MonsterContainer from './monster/MonsterContainer.js';
 import registerServiceWorker from './registerServiceWorker';
