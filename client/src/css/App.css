@@ -1,44 +1,102 @@
-.monster {
-  margin:20px;
-  background-color: grey;
-  float:left;
-  padding: 10px;
-  border:2px solid black;
-  transition: 0.25s;
+.monster-list-container{
+  position: relative;
+  left: -50%;
+  transform: translate(50%);
+  width: 100%;
+  max-width: 100vw;
+  height: 100%;
 }
-.monster h2, .monster h3 {
+.monster {
+  background-color: var(--mcl);
+  transition: 0.25s;
+  width: 32%;
+  min-width: 250px;
+  max-width: 400px;
+  height: auto;
+  border: 2px solid #270c53;
+  border-radius: 15px;
+  margin: 10px 5px;
+  padding: 15px 10px;
+  float: left;
+}
+.monster h2{
+  font-family: 'Kumar One', cursive;
+  font-size: 40px;
+  text-align: center;
   color: white;
 }
-.monster p {
-  margin:0;
+.moster h3, .monster p, .undefined, .create_monster{
+  font-size: 16px;
   color:white;
+  font-family: 'Roboto', sans-serif;
 }
+.undefined div, .create_monster div{
+  margin-bottom: 2px;
+}
+.undefined h3, .create_monster h3{
+  text-align: center;
+}
+.undefined div:first-child h3, .create_monster div:first-child h3{
+  margin-top: 15px;
+}
+.undefined input, .create_monster input{
+  width: 100%;
+  border: none;
+  outline: none;
+  height: 23px;
+  transition: 0.25s;
+}
+div input:focus{
+  background-color: #a7e49d;
+}
+.undefined button, .create_monster button{
+  position: relative;
+  width: 25%;
+  left: 50%;
+  bottom: -15px;
+  transform: translateX(-50%);
+  margin: 10px 0;
+  margin-top: 0;
+  padding: 5px;
+  border: 2px solid #270c53;
+  border-radius: 15px;
+  background-color: #fff;
+  color: #270c53;
+  cursor: pointer;
+  transition: 0.25s;
+}
+
 
 .details_toolbar {
   position: absolute;
   top: 0;
-  right: 0;
+  left: 50%;
+  transform: translateX(-50%);
   font-size: 18px;
   font-weight: bold;
   color: white;
   cursor: pointer;
-  padding: 4px 8px;
 }
 .details_toolbar span {
-  padding: 4px;
+  padding: 0 4px;
 }
 
 .add_monster {
   position: fixed;
-  bottom: 0;
+  bottom: 20px;
   left: 50%;
   transform: translateX(-50%);
-  width: 100%;
+  width: 25%;
   padding: 15px;
-  border: 0;
-  background-color: rgb(208, 139, 47);
-  color: white;
+  border: 2px solid #270c53;
+  border-radius: 15px;
+  background-color: var(--mcl);
+  color: #fff;
   cursor: pointer;
+  transition: 0.25s;
+}
+.add_monster:hover{
+  background-color: var(--mcl2);
 }
 .search_bar {
   position: fixed;
