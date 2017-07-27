@@ -1,8 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import './index.css';
-import './App.css';
+import './css/index.css';
+import './css/App.css';
 
 import MonsterContainer from './monster/MonsterContainer.js';
 import registerServiceWorker from './registerServiceWorker';

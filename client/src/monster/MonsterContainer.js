@@ -20,25 +20,27 @@ class MonsterContainer extends Component {
     this.createMonster(monster);
   }
 
-// load Monsters from Data
+  // load Monsters from Data
   loadMonsters = () => {
     Client.getMonsters((serverMonsterList) => {
-      console.log(serverMonsterList);
       this.setState({ monsterList: serverMonsterList })
     })
   }
 
+  // create monster
   createMonster = (monster) => {
-      console.log(monster);
+    // set state of monsterList for react
     this.setState({
       monsterList: this.state.monsterList.concat(monster.data),
     })
+    //send new monster to backend
     Client.createMonster(monster.data);
   }
 
   updateMonsterList = (monster) => {
     this.setState({
       monsterList: this.state.monsterList.map((monsterData) => {
+        //check if id exists and then update the monster with the same id
         if (monster.data.id === monsterData.id) {
           return Object.assign({}, monsterData, {
             id: monster.data.id,
@@ -60,11 +62,13 @@ class MonsterContainer extends Component {
             dmg: monster.data.dmg,
             trefferrate: monster.data.trefferrate,
           });
+        // else just return the same monster data the loop was outputing
         } else {
           return monsterData;
         }
       }),
     });
+    // send updated monster to backend
     Client.updateMonster(monster.data);
   }
 

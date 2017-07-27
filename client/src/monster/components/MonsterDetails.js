@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { CreateMonsterForm } from './CreateMonsterForm';
+import FontAwesome from 'react-fontawesome';
 
 export class MonsterDetails extends Component {
   state = {
@@ -50,8 +51,8 @@ export class MonsterDetails extends Component {
           <p>Trefferrate: { this.props.trefferrate } </p>
 
           <div className="details_toolbar">
-            <span onClick={this.handleToggleEdit}>b</span>
-            <span onClick={this.props.handleToggleDetails}>x</span>
+            <FontAwesome onClick={this.handleToggleEdit} name='pencil-square' />
+            <FontAwesome onClick={this.props.handleToggleDetails} name='times-circle' />
           </div>
 
         </div>

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import FontAwesome from 'react-fontawesome';
 const uuidv1 = require('uuid/v1');
 
 export class CreateMonsterForm extends Component {
@@ -79,13 +80,17 @@ export class CreateMonsterForm extends Component {
       <div className={"monster " + this.props.className}>
         {inputs}
 
-        <button type='submit'
+        <button
+          type='submit'
           onClick={this.handleSubmit}
         >
           {buttonText}
         </button>
         <div className="details_toolbar">
-          <span onClick={this.props.className === 'create_monster' ? this.props.handleToggleCreateMonster : this.props.handleToggleEdit}>x</span>
+          <FontAwesome
+            onClick={this.props.className === 'create_monster' ? this.props.handleToggleCreateMonster : this.props.handleToggleEdit}
+            name='times-circle'
+          />
         </div>
       </div>
     );
