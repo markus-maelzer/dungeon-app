@@ -1,7 +1,7 @@
 
 
-function getMonsters(success) {
-  return fetch('api/monster', {
+function getData(success) {
+  return fetch('api/dungeon', {
     header: {
       Accept: 'application/json',
     },
@@ -10,10 +10,11 @@ function getMonsters(success) {
     .then(success);
 }
 
-function createMonster(data) {
-  return fetch('/api/monster', {
+function changeFilePath(path) {
+  console.log(path);
+  return fetch('api/filepath' , {
     method: 'post',
-    body: JSON.stringify(data),
+    body: JSON.stringify(path),
     headers: {
       'Accept': 'application/json',
       'Content-Type': 'application/json',
@@ -21,9 +22,37 @@ function createMonster(data) {
   }).then(checkStatus);
 }
 
-function updateMonster(data, path) {
-  return fetch('/api/monster', {
+function createData(data, path) {
+  return fetch('/api/dungeon', {
+    method: 'post',
+    body: JSON.stringify({
+      data: data,
+      filePath: path
+    }),
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+    },
+  }).then(checkStatus);
+}
+
+function updateData(data, path) {
+  return fetch('/api/dungeon', {
     method: 'put',
+    body: JSON.stringify({
+      data: data,
+      filePath: path
+    }),
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+    },
+  }).then(checkStatus);
+}
+
+function deleteData(data, path) {
+  return fetch('/api/timers', {
+    method: 'delete',
     body: JSON.stringify({
       data: data,
       filePath: path
@@ -53,5 +82,5 @@ function parseJSON(response) {
 }
 
 
-const Client = { getMonsters, createMonster, updateMonster }
+const Client = { getData, createData, updateData, changeFilePath }
 export default Client;

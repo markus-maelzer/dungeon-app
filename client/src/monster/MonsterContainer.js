@@ -33,12 +33,13 @@ class MonsterContainer extends Component {
 
   // load Monsters from Data
   loadMonsters = () => {
-    Client.getMonsters((serverMonsterList) => {
+    //Client.changeFilePath('monster');
+    Client.getData((serverMonsterList) => {
       this.setState({
         monsterList: serverMonsterList,
         filteredMonsterList: serverMonsterList
       })
-    })
+    });
   }
 
   createMonster = (monster) => {
@@ -48,7 +49,7 @@ class MonsterContainer extends Component {
       filteredMonsterList: this.state.monsterList.concat(monster.data),
     })
     //send new monster to backend
-    Client.createMonster(monster.data);
+    Client.createData(monster.data, 'monster');
   }
 
   updateMonsterList = (monster) => {
@@ -87,7 +88,7 @@ class MonsterContainer extends Component {
       filteredMonsterList: newMonsterList
     });
     // send updated monster to backend
-    Client.updateMonster(monster.data, 'monster');
+    Client.updateData(monster.data, 'monster');
   }
 
 

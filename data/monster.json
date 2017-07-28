@@ -82,5 +82,26 @@
     "movement_speed": "",
     "dmg_multiplikator": "1",
     "trefferrate": ""
+  },
+  {
+    "id": "14f3fe60-73e1-11e7-b543-8ba62fb7c0be",
+    "name": "asdfadsf",
+    "dungeon_floor": "",
+    "challenge": "",
+    "leben": "",
+    "waffen": "",
+    "rüstung": "",
+    "zäheit": "",
+    "schwäche": "",
+    "resistenzen": "",
+    "immunitäten": "",
+    "größe": "",
+    "beschreibung": "",
+    "besonderheiten": "",
+    "skills": "",
+    "skill_multiplikator": "",
+    "movement_speed": "",
+    "dmg_multiplikator": "",
+    "trefferrate": ""
   }
 ]
