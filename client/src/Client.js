@@ -21,10 +21,13 @@ function createMonster(data) {
   }).then(checkStatus);
 }
 
-function updateMonster(data) {
+function updateMonster(data, path) {
   return fetch('/api/monster', {
     method: 'put',
-    body: JSON.stringify(data),
+    body: JSON.stringify({
+      data: data,
+      filePath: path
+    }),
     headers: {
       'Accept': 'application/json',
       'Content-Type': 'application/json',

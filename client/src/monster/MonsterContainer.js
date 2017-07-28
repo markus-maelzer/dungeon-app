@@ -87,7 +87,7 @@ class MonsterContainer extends Component {
       filteredMonsterList: newMonsterList
     });
     // send updated monster to backend
-    Client.updateMonster(monster.data);
+    Client.updateMonster(monster.data, 'monster');
   }
 
 

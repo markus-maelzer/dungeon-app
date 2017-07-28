@@ -13,9 +13,6 @@ const io = require('socket.io')(server);
 //app.set('port', (process.env.API_PORT || 3001));
 const port = 3001;
 
-// json files
-const MONSTER_DATA = path.join(__dirname , 'data/monster.json');
-
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
@@ -86,24 +83,26 @@ function updateData(req, attr) {
   data.forEach((object) => {
     // if a object in data array has the same id than the id in request
     // switch data from req body with the object data
-    if (object.id === req.body.id) {
+    if (object.id === req.id) {
        Object.getOwnPropertyNames(object).forEach(prop => {
-        object[prop] = req.body[prop];
+        object[prop] = req[prop];
       })
     }
   });
   return(data);
 }
 
-
-
+function filePath(fileName) {
+  return path.join(__dirname , 'data/'+ fileName +'.json');
+}
 
 app.put('/api/monster', (req, res) => {
-  fs.readFile(MONSTER_DATA, (err, data) => {
+  const fileName = filePath(req.body.filePath);
+  fs.readFile(fileName, (err, data) => {
     const monster = JSON.parse(data);
-    let updatedData = updateData(req, monster);
+    const updatedData = updateData(req.body.data, monster);
 
-    fs.writeFile(MONSTER_DATA, JSON.stringify(updatedData, null, 2), () => {
+    fs.writeFile(fileName, JSON.stringify(updatedData, null, 2), () => {
       res.json({});
     });
   });
