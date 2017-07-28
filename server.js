@@ -64,7 +64,7 @@ app.post('/api/monster', (req, res) => {
       skills: req.body.skills,
       skill_multiplikator: req.body.skill_multiplikator,
       movement_speed: req.body.movement_speed,
-      dmg: req.body.dmg,
+      dmg_multiplikator: req.body.dmg_multiplikator,
       trefferrate: req.body.trefferrate,
     };
     monster.push(newMonster);
@@ -76,32 +76,34 @@ app.post('/api/monster', (req, res) => {
   });
 });
 
+function createData() {
+
+}
+
+function updateData(req, attr) {
+  let data = attr;
+  // iterate through data array
+  data.forEach((object) => {
+    // if a object in data array has the same id than the id in request
+    // switch data from req body with the object data
+    if (object.id === req.body.id) {
+       Object.getOwnPropertyNames(object).forEach(prop => {
+        object[prop] = req.body[prop];
+      })
+    }
+  });
+  return(data);
+}
+
+
+
+
 app.put('/api/monster', (req, res) => {
   fs.readFile(MONSTER_DATA, (err, data) => {
     const monster = JSON.parse(data);
-    monster.forEach((monster) => {
-      if (monster.id === req.body.id) {
-        monster.name = req.body.name;
-        monster.größe = req.body.größe;
-        monster.beschreibung = req.body.beschreibung;
-        monster.waffen = req.body.waffen;
-        monster.besonderheiten = req.body.besonderheiten;
-        monster.dungeon_floor = req.body.dungeon_floor;
-        monster.challenge = req.body.challenge;
-        monster.leben = req.body.leben;
-        monster.zäheit = req.body.zäheit;
-        monster.resistenzen = req.body.resistenzen;
-        monster.schwäche = req.body.schwäche;
-        monster.immunitäten = req.body.immunitäten;
-        monster.rüstung = req.body.rüstung;
-        monster.skills = req.body.skills;
-        monster.skill_multiplikator = req.body.skill_multiplikator;
-        monster.movement_speed = req.body.movement_speed;
-        monster.dmg = req.body.dmg;
-        monster.trefferrate = req.body.trefferrate;
-      }
-    });
-    fs.writeFile(MONSTER_DATA, JSON.stringify(monster, null, 2), () => {
+    let updatedData = updateData(req, monster);
+
+    fs.writeFile(MONSTER_DATA, JSON.stringify(updatedData, null, 2), () => {
       res.json({});
     });
   });

@@ -27,7 +27,7 @@
     "challenge": "mittel",
     "leben": "150",
     "waffen": "Mensch_Inv",
-    "rüstung": "",
+    "rüstung": "5",
     "zäheit": "",
     "schwäche": "",
     "resistenzen": "",
@@ -68,8 +68,8 @@
     "dungeon_floor": "25",
     "challenge": "hard",
     "leben": "400",
-    "waffen": "",
-    "rüstung": "",
+    "waffen": "sdaasda",
+    "rüstung": "asd",
     "zäheit": "",
     "schwäche": "",
     "resistenzen": "",
@@ -80,6 +80,7 @@
     "skills": "",
     "skill_multiplikator": "",
     "movement_speed": "",
+    "dmg_multiplikator": "1",
     "trefferrate": ""
   }
 ]
