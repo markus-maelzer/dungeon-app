@@ -15,13 +15,6 @@ class MonsterContainer extends Component {
   componentDidMount() {
     this.loadMonsters();
   }
-  shouldComponentUpdate(nextState) {
-    //console.log(this.state.monsterList);
-    return true;
-  }
-  componentDidUpdate() {
-
-  }
 
   handleEditFormSubmit = (monster) => {
     this.updateMonsterList(monster);
@@ -33,7 +26,7 @@ class MonsterContainer extends Component {
 
   // load Monsters from Data
   loadMonsters = () => {
-    //Client.changeFilePath('monster');
+    Client.changeFilePath('monster');
     Client.getData((serverMonsterList) => {
       this.setState({
         monsterList: serverMonsterList,

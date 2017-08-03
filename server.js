@@ -24,16 +24,15 @@ server.listen(port, function () {
 
 
 // in testing
-app.get('/api/filepath' , (req, res) => {
-  console.log(req.body);
-  DATA_FILE = filePath(req.body);
-  console.log(DATA_FILE);
+app.post('/api/filepath', (req, res) => {
+  DATA_FILE = filePath(req.body.filePath);
+  console.log('get/filepath: \n' + DATA_FILE);
 });
 
 
 let DATA_FILE = path.join(__dirname , 'data/monster.json');
 app.get('/api/dungeon', (req, res) => {
-  console.log(DATA_FILE);
+  console.log('get/dungeon: \n' + DATA_FILE);
   fs.readFile(DATA_FILE, (err, data) => {
     res.setHeader('Cache-Control', 'no-cache');
     res.json(JSON.parse(data));
@@ -66,6 +65,13 @@ app.put('/api/dungeon', (req, res) => {
   });
 });
 
+app.delete('/api/dungeon', (req, res) => {
+  const fileName = filePath(req.body.filePath);
+  fs.readFile(fileName, (err, data) => {
+    const fileData = JSON.parse(data);
+  })
+});
+
 
 function createData(req) {
   let object = req;
@@ -90,8 +96,26 @@ function updateData(req, attr) {
   return(data);
 }
 
+const dataFiles = [
+  'monster',
+  'items',
+  'skills',
+  'spells',
+  'npcs'
+]
+
 function filePath(fileName) {
-  return path.join(__dirname , 'data/'+ fileName +'.json');
+  let checkFileName = false;
+  for (var i = 0; i < dataFiles.length; i++) {
+    if(dataFiles[i] === fileName) {
+      checkFileName === true;
+    }
+  }
+  if (checkFileName) {
+    return path.join(__dirname , 'data/'+ fileName +'.json');
+  } else {
+    return false;
+  }
 }
 
 

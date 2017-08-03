@@ -14,7 +14,9 @@ function changeFilePath(path) {
   console.log(path);
   return fetch('api/filepath' , {
     method: 'post',
-    body: JSON.stringify(path),
+    body: JSON.stringify({
+      filePath: path
+    }),
     headers: {
       'Accept': 'application/json',
       'Content-Type': 'application/json',
@@ -51,7 +53,7 @@ function updateData(data, path) {
 }
 
 function deleteData(data, path) {
-  return fetch('/api/timers', {
+  return fetch('/api/dungeon', {
     method: 'delete',
     body: JSON.stringify({
       data: data,
