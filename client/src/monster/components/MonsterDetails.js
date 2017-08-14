@@ -7,6 +7,10 @@ export class MonsterDetails extends Component {
     toggleEdit: false,
   }
 
+  handleOnClick = () => {
+    
+  }
+
   handleToggleEdit = () => {
     this.toggleEdit();
   }
@@ -54,6 +58,7 @@ export class MonsterDetails extends Component {
           <div className="details_toolbar">
             <FontAwesome onClick={this.handleToggleEdit} name='pencil-square' />
             <FontAwesome onClick={this.props.handleToggleDetails} name='times-circle' />
+            <FontAwesome onCLick={this.handleDelete} name='trash' />
           </div>
 
         </div>

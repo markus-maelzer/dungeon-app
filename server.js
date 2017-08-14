@@ -105,17 +105,7 @@ const dataFiles = [
 ]
 
 function filePath(fileName) {
-  let checkFileName = false;
-  for (var i = 0; i < dataFiles.length; i++) {
-    if(dataFiles[i] === fileName) {
-      checkFileName === true;
-    }
-  }
-  if (checkFileName) {
     return path.join(__dirname , 'data/'+ fileName +'.json');
-  } else {
-    return false;
-  }
 }
 
 
