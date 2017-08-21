@@ -17,7 +17,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 server.listen(port, function () {
-  console.log('Server not running on port: ' + port);
+  console.log('Server definately not running on port: ' + port);
 });
 
 

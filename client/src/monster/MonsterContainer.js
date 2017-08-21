@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import { MonsterList } from './components/MonsterList';
 import { ToggleCreateMonsterForm } from './components/ToggleCreateMonsterForm';
-import { SortMonsters } from './components/SortMonsters';
+import { NavBar } from '../nav/NavBar';
+
 
 import Client from '../Client';
 
 
-class MonsterContainer extends Component {
+export class MonsterContainer extends Component {
   state = {
     monsterList: [],
     filteredMonsterList: []
@@ -104,7 +105,7 @@ class MonsterContainer extends Component {
         <ToggleCreateMonsterForm
           onFormSubmit={this.handleCreateFormSubmit}
         />
-        <SortMonsters
+        <NavBar
           searchForMonster={this.searchForMonster}
           initialItems={this.state.monsterList}
         />
@@ -112,5 +113,3 @@ class MonsterContainer extends Component {
     );
   }
 }
-
-export default MonsterContainer;

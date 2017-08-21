@@ -11,7 +11,7 @@ function getData(success) {
 }
 
 function changeFilePath(path) {
-  console.log(path);
+  //console.log(path);
   return fetch('api/filepath' , {
     method: 'post',
     body: JSON.stringify({

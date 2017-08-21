@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { SearchBar } from './SearchBar';
 
-export class SortMonsters extends Component {
+export class SortSearchBar extends Component {
   render() {
     return (
       <div className="sort_bar">

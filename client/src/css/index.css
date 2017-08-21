@@ -19,3 +19,13 @@ h1, h2, h3, h4, h5, h6, p, ul, li, a {
   margin: 0;
   padding: 0;
 }
+
+.toggle_nav_button {
+  position: fixed;
+  left: 10px;
+  top: 56px;
+  width: 80px;
+  height: 80px;
+  background-color: var(--mcl2);
+  z-index: 101;
+}
