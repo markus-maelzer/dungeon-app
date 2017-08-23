@@ -38,7 +38,8 @@ export class NavBar extends Component {
         <div className={this.state.toggleNav ? "sort_bar" : "sort_bar_extended"} >
           <div className='nav'>
             <ul>
-              <li><NavLink to='/monster'><span>Monster</span></NavLink></li>
+              <li><NavLink to='/' onClick={this.handleToggleNav}><span>Home</span></NavLink></li>
+              <li><NavLink to='/monster' onClick={this.handleToggleNav}><span>Monster</span></NavLink></li>
             </ul>
           </div>
         </div>
