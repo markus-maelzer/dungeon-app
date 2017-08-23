@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
-import { CreateMonsterForm } from './CreateMonsterForm';
+import { CreateDataForm } from './CreateDataForm';
 import FontAwesome from 'react-fontawesome';
 
-export class MonsterDetails extends Component {
+export class DataDetails extends Component {
   state = {
     toggleEdit: false,
   }
 
   handleOnClick = () => {
-    
+
   }
 
   handleToggleEdit = () => {
@@ -65,7 +65,7 @@ export class MonsterDetails extends Component {
       );
     } else {
       return (
-        <CreateMonsterForm
+        <CreateDataForm
           id={this.props.id}
           name={this.props.name}
           dungeon_floor={this.props.dungeon_floor}

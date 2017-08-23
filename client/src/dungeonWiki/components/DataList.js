@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
-import { Monster } from './Monster';
+import { Data } from './Data';
 
-export class MonsterList extends Component {
+export class DataList extends Component {
 
   render() {
     const monsterList = this.props.monsterList.map((monster, i) => {
       return (
-        <Monster
+        <Data
           id={monster.id}
           key={i}
           name={monster.name}

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { SearchBar } from './SearchBar';
+import { NavLink } from 'react-router-dom';
 
 export class NavBar extends Component {
   state = {
@@ -18,26 +19,30 @@ export class NavBar extends Component {
   }
 
   render() {
-    const toggleNav = this.state.toggleNav ?
-      <div className='toggle_nav_button' onClick={this.handleToggleNav}>
-        <div></div>
-        <div></div>
-        <div></div>
-      </div>
-      :
-      <div className='nav'>
-        <ul>
-        </ul>
-      </div>
-      ;
-    return (
-      <div className={this.state.toggleNav ? "sort_bar" : "sort_bar_extended"} >
-        {toggleNav}
-        <SearchBar
-          searchForMonster={this.props.searchForMonster}
-          initialItems={this.props.initialItems}
-        />
-      </div>
-    );
+    if (this.state.toggleNav) {
+      return (
+        <div className={this.state.toggleNav ? "sort_bar" : "sort_bar_extended"} >
+          <div className='toggle_nav_button' onClick={this.handleToggleNav}>
+            <div></div>
+            <div></div>
+            <div></div>
+          </div>
+          <SearchBar
+            searchForMonster={this.props.searchForMonster}
+            initialItems={this.props.initialItems}
+          />
+        </div>
+      );
+    } else {
+      return (
+        <div className={this.state.toggleNav ? "sort_bar" : "sort_bar_extended"} >
+          <div className='nav'>
+            <ul>
+              <li><NavLink to='/monster'><span>Monster</span></NavLink></li>
+            </ul>
+          </div>
+        </div>
+      );
+    }
   }
 }

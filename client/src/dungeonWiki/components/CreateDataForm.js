@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import FontAwesome from 'react-fontawesome';
 const uuidv1 = require('uuid/v1');
 
-export class CreateMonsterForm extends Component {
+export class CreateDataForm extends Component {
 
   state = {
     name: this.props.name || '',

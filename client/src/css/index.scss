@@ -6,13 +6,15 @@ body {
   font-size: 16px;
 
 /* Color Variables */
-  --mcl: rgb(209, 82, 64);
+  --mcl: rgb(190, 73, 56);
   --mcl2: #673AB7;
   --mcl3: rgb(229, 99, 84);
+  --mcl4: #4CAF50;
 }
 // https://www.materialpalette.com/deep-purple/purple
 // --mcl: #ff8819;
 // --mcl2: #6a19ff;
+// rgb(209, 82, 64)
 
 * {
   position: relative;
@@ -32,4 +34,57 @@ h1,h2,h3,h4,h5,h6,p,ul,li,a {
   height: 80px;
   background-color: var(--mcl2);
   z-index: 101;
+}
+
+.nav {
+  position: fixed;
+  width: 100%;
+  height: 100vh;
+  background-color:var(--mcl);
+  color: white;
+  z-index: 1000;
+  top: 0;
+
+  ul {
+    list-style-type: none;
+
+    li {
+      display: block;
+      text-align: center;
+
+      a {
+        text-decoration: none;
+        color: #ffada7;
+        display: block;
+        font-size: 36pt;
+
+        span {
+          transition:  0.35s;
+
+          &::before, &::after {
+            content: "";
+            position: absolute;
+            height: 60%;
+            width: 0;
+            left: -16px;
+            top: 50%;
+            transform: translate(-100%, -50%);
+            background-color: #fff8f7;
+            transition: 0.35s;
+          }
+          &::after {
+            transform: translate(100%, -50%);
+            left: initial;
+            right: -16px;
+          }
+          &:hover {
+            color: #fff8f7;
+            &:before, &:after {
+              width: 50vw;
+            }
+          }
+        }
+      }
+    }
+  }
 }

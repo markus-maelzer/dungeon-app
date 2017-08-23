@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { MonsterDetails } from './MonsterDetails';
+import { DataDetails } from './DataDetails';
 
-export class Monster extends Component  {
+export class Data extends Component  {
   state = {
     toggleDetails: false,
   }
@@ -30,7 +30,7 @@ export class Monster extends Component  {
       );
     } else {
       return (
-        <MonsterDetails
+        <DataDetails
           id={this.props.id}
           name={this.props.name}
           dungeon_floor={this.props.dungeon_floor}

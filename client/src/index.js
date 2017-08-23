@@ -7,14 +7,14 @@ import { createStore } from 'redux';
 import { BrowserRouter as Router, Route, Switch  } from 'react-router-dom';
 
 // import reducer
-import { reducer } from './MainReducer';
+import { reducer } from './reducer/MainReducer';
 
 // import css files
 import './css/index.css';
 import './css/monster.css';
 
 // import Components
-import { MonsterContainer } from './monster/MonsterContainer.js';
+import { DataContainer } from './dungeonWiki/DataContainer.js';
 import registerServiceWorker from './registerServiceWorker';
 
 const store = createStore(reducer);
@@ -26,7 +26,12 @@ export class App extends Component {
       <Provider store={store}>
         <Router>
           <Switch>
-            <Route exact path='/' component={MonsterContainer} />
+            <Route exact path='/' render={(props) => (
+              <DataContainer {...props} filePath='' />
+            )} />
+            <Route exact path='/monster' render={(props) => (
+              <DataContainer {...props} filePath='monster' />
+            )} />
           </Switch>
         </Router>
       </Provider>

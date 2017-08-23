@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
-import { MonsterList } from './components/MonsterList';
-import { ToggleCreateMonsterForm } from './components/ToggleCreateMonsterForm';
+import { DataList } from './components/DataList';
+import { ToggleCreateDataForm } from './components/ToggleCreateDataForm';
 import { NavBar } from '../nav/NavBar';
 
 
 import Client from '../Client';
 
 
-export class MonsterContainer extends Component {
+export class ReduxContainer extends Component {
   state = {
     monsterList: [],
     filteredMonsterList: []
@@ -98,11 +98,11 @@ export class MonsterContainer extends Component {
   render() {
     return (
       <div className="monster-container">
-        <MonsterList
+        <DataList
           monsterList={this.state.filteredMonsterList}
           onFormSubmit={this.handleEditFormSubmit}
          />
-        <ToggleCreateMonsterForm
+        <ToggleCreateDataForm
           onFormSubmit={this.handleCreateFormSubmit}
         />
         <NavBar

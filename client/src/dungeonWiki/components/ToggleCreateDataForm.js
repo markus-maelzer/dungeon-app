@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import { CreateMonsterForm } from './CreateMonsterForm';
+import { CreateDataForm } from './CreateDataForm';
 import { AddButton } from './AddButton';
 
-export class ToggleCreateMonsterForm extends Component {
+export class ToggleCreateDataForm extends Component {
   state = {
     isOpen: false,
   }
@@ -30,7 +30,7 @@ export class ToggleCreateMonsterForm extends Component {
 
   render() {
     if (this.state.isOpen) {
-      return <CreateMonsterForm
+      return <CreateDataForm
         className='create_monster'
         handleToggleCreateMonster={this.handleToggleCreateMonster}
         onFormSubmit={this.handleCreateMonsterSubmit}
