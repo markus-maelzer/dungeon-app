@@ -1,14 +1,17 @@
 import React, { Component } from 'react';
-import { NavBar } from '../nav/NavBar';
+import { NavContainer } from '../nav/NavContainer';
 import { connect } from 'react-redux'
 //import { ReduxContainer } from './ReduxContainer';
 
 export class DataContainer extends Component {
+  componentWillMount() {
+    this.props.dispatch()
+  }
   render() {
     return (
       <div className='data_container'>
         <ReduxContainer filepath={this.props.filepath} />
-        <NavBar />
+        <NavContainer />
       </div>
     );
   }

@@ -1,11 +1,8 @@
 import React, { Component } from 'react';
 import { DataList } from './components/DataList';
 import { ToggleCreateDataForm } from './components/ToggleCreateDataForm';
-import { NavBar } from '../nav/NavBar';
-
 
 import Client from '../Client';
-
 
 export class ReduxContainer extends Component {
   state = {
@@ -104,10 +101,6 @@ export class ReduxContainer extends Component {
          />
         <ToggleCreateDataForm
           onFormSubmit={this.handleCreateFormSubmit}
-        />
-        <NavBar
-          searchForMonster={this.searchForMonster}
-          initialItems={this.state.monsterList}
         />
       </div>
     );

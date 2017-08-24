@@ -1,13 +1,16 @@
 // import modules
 import { combineReducers } from 'redux';
+import Client from '../Client';
 
 //initial States
 const dataReducerState = {
-  filepath: null,
   data: [],
   filterData: [],
-  toggleDetails: false,
-  toggleEdit: false,
+  toggleNav: true,
+  filepath: null,
+  fetching: false,
+  fetched: false,
+  error: null,
 }
 
 export const reducer = combineReducers({
@@ -16,12 +19,28 @@ export const reducer = combineReducers({
 
 function dataReducer(state = dataReducerState, action) {
   switch (action.type) {
-    case 'GET_FILEPATH': {
-      return action.filepath;
+    case 'CLICK_LINK': {
+      var filepath = checkFilepath(state, action);
+      return {
+        ...state,
+        toggleNav: !state.toggleNav,
+        filepath: filepath,
+      }
     }
     default: {
       return state;
     }
+  }
+}
 
+function checkFilepath(state, action) {
+  switch (action.filepath) {
+    case 'toggle' :
+    case 'home' : {
+      return state.filepath;
+    }
+    default : {
+      return action.filepath;
+    }
   }
 }
