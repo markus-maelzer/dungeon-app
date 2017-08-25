@@ -1,6 +1,6 @@
+import axios from 'axios';
 
-
-
+/*
 export const postFilepath = (path) => dispatch => fetch('api/filepath', {
   method: 'post',
   body: JSON.stringify({
@@ -11,26 +11,58 @@ export const postFilepath = (path) => dispatch => fetch('api/filepath', {
     'Content-Type': 'application/json',
   },
 }).then(checkStatus)
+*/
+export const getServerData = (filepath) => {
+  return dispatch =>  {
+    return dispatch({
+      type: 'GET_SERVER_DATA',
+      payload: {
+        promise: new Promise((resolve, rejected) => {
+          axios.get('api/dungeon')
+            .then(response => {
+              resolve(response.data);
+            })
+            .catch(error => {
+              rejected(error.data)
+            })
+        }),
+      }
+    })
+  }
+}
 
-export const getServerData = (success) => dispatch => fetch('api/dungeon', {
-  header: {
-    Accept: 'application/json',
-  },
-}).then(checkStatus)
 
 
+/*
+promise: new Promise((resolve, rejected) => {
+  fetch('api/dungeon', {
+    header: {
+      Accept: 'application/json',
+    },
+  }).then(response => {
+    if (!response.ok) {
+      throw new Error(response);
+    }
+    resolve(response.json());
+  }).catch(error => {
+    rejected(error);
+  })
+}),
 
 
-cosnt checkStatus = (response) => {
+const checkStatus = (response) => {
   if (response.status >= 200 && response.status < 300) {
-    dispatch({type: 'POST_FULFILLED', payload: response})
     return response;
   } else {
     const error = new Error('HTTP Error: ' + response.statusText);
     error.status = response.statusText;
     error.response = response;
     console.log(error);
-    dispatch({type: 'POST_REJECTED', payload: error});
     throw error;
   }
 }
+
+function parseJSON(response) {
+  return response.json()
+}
+*/

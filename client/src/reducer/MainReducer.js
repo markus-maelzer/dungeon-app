@@ -1,6 +1,5 @@
 // import modules
 import { combineReducers } from 'redux';
-import Client from '../Client';
 
 //initial States
 const dataReducerState = {
@@ -21,10 +20,37 @@ function dataReducer(state = dataReducerState, action) {
   switch (action.type) {
     case 'CLICK_LINK': {
       var filepath = checkFilepath(state, action);
+      if (filepath === state.filepath) {
+        return {
+          ...state,
+          toggleNav: !state.toggleNav,
+          filepath: filepath,
+        }
+      } else {
+        return {
+          ...state,
+          toggleNav: !state.toggleNav,
+          filepath: filepath,
+          fetching: false,
+          fetched: false,
+        }
+      }
+    }
+    case 'TOGGLE_NAV': {
+      return state;
+    }
+    case 'GET_SERVER_DATA_PENDING': {
+      return {...state, fetching: true}
+    }
+    case 'GET_SERVER_DATA_REJECTED': {
+      return {...state, fetching:false, error: action.payload}
+    }
+    case 'GET_SERVER_DATA_FULFILLED': {
       return {
         ...state,
-        toggleNav: !state.toggleNav,
-        filepath: filepath,
+        fetching: false,
+        fetched: true,
+        data: action.payload,
       }
     }
     default: {

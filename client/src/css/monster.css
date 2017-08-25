@@ -1,12 +1,13 @@
-.monster-container {
+.data_container {
   padding: 50px 0;
 }
 
-.monster-container .monster-list-container {
+.data_container .data_list_container {
   width: 100%;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   align-items: start;
+  top: 20px;
 }
 
 .monster {

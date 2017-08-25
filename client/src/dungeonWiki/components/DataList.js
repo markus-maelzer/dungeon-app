@@ -1,46 +1,50 @@
-import React, { Component } from 'react';
+//import React, { Component } from 'react';
+import { connect } from 'react-redux'
+
 import { Data } from './Data';
 
-export class DataList extends Component {
-
-  render() {
-    const monsterList = this.props.monsterList.map((monster, i) => {
-      return (
-        <Data
-          id={monster.id}
-          key={i}
-          name={monster.name}
-          dungeon_floor={monster.dungeon_floor}
-          challenge={monster.challenge}
-          leben={monster.leben}
-
-          waffen={monster.waffen}
-          rüstung={monster.rüstung}
-
-          zäheit={monster.zäheit}
-          schwäche={monster.schwäche}
-          resistenzen={monster.resistenzen}
-          immunitäten={monster.immunitäten}
-
-          größe={monster.größe}
-          beschreibung={monster.beschreibung}
-          besonderheiten={monster.besonderheiten}
-
-          skills={monster.skills}
-          skill_multiplikator={monster.skill_multiplikator}
-          movement_speed={monster.movement_speed}
-          dmg_multiplikator={monster.dmg_multiplikator}
-          trefferrate={monster.trefferrate}
-
-          onFormSubmit={this.props.onFormSubmit}
-        />
-      )
-    });
-
-    return (
-      <div className='monster-list-container'>
-        {monsterList}
-      </div>
-    );
+function toggleDetails(toggle) {
+  return {
+    type: 'TOGGLE_DETAILS',
+    toggle: toggle,
   }
 }
+
+function toggleEdit(toggle) {
+  return {
+    type: 'TOGGLE_EDIT',
+    toggle: toggle,
+  }
+}
+
+const mapToStateDataList = (state) => {
+  const list = state.dataReducer.data.map(item => {
+    let object = {};
+    Object.getOwnPropertyNames(item).forEach(prop => {
+      object[prop] = item[prop];
+    })
+    return object;
+  })
+  console.log(list);
+  return {
+    list,
+  };
+}
+
+
+const mapToPropsDataList = (dispatch) => (
+  {
+    toggleDetails: (curBool) => (
+      dispatch(toggleDetails(curBool))
+    ),
+    toggleEdit: (curBool) => (
+      dispatch(toggleEdit(curBool))
+    )
+  }
+)
+
+
+export const DataList = connect(
+  mapToStateDataList,
+  mapToPropsDataList
+)(Data)

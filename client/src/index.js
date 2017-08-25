@@ -19,7 +19,7 @@ import './css/index.css';
 import './css/monster.css';
 
 // import Components
-import { DataContainer } from './dungeonWiki/DataContainer.js';
+import { ReduxContainer } from './dungeonWiki/DataContainer.js';
 import registerServiceWorker from './registerServiceWorker';
 
 const middleware = applyMiddleware(promise(), thunk, createLogger());
@@ -37,10 +37,10 @@ export class App extends Component {
         <Router>
           <Switch>
             <Route exact path='/' render={(props) => (
-              <DataContainer {...props} filePath='' />
+              <ReduxContainer {...props} filePath='' />
             )} />
             <Route exact path='/monster' render={(props) => (
-              <DataContainer {...props} filePath='monster' />
+              <ReduxContainer {...props} filePath='monster' />
             )} />
           </Switch>
         </Router>
