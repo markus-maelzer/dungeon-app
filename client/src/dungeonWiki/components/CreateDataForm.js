@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
 import FontAwesome from 'react-fontawesome';
-const uuidv1 = require('uuid/v1');
+import uuidv1 from 'uuid/v1';
+import { connect } from 'react-redux';
+
+import { toggleCreate, toggleEdit } from '../actions/wikiActions';
+import { createData, updateData } from '../actions/userActions';
 
 export class CreateDataForm extends Component {
 
@@ -15,7 +19,7 @@ export class CreateDataForm extends Component {
   handleSubmit = () => {
     // check if submit has id
     // if not create a new uuid
-    let id = this.props.id || '';
+    let id = this.state.id || '';
     if (id === '') {
       id = uuidv1();
     }
@@ -30,9 +34,12 @@ export class CreateDataForm extends Component {
     }
 
     // pass formData as a parameter to onFormSubmit
-    this.props.onFormSubmit({
-      data: formData
-    })
+    if(this.props.className === 'create_monster') {
+      this.props.createData(formData);
+    } else {
+      this.props.updateData(formData);
+    }
+
   }
 
   render() {
@@ -57,7 +64,7 @@ export class CreateDataForm extends Component {
       }
     });
 
-    const buttonText = this.props.id ? 'Update' : 'Create';
+    const buttonText = item.id ? 'Update' : 'Create';
     const className = this.props.className || 'updateMonster';
     return(
       <div className={"monster monster-details form " + className}>
@@ -73,7 +80,7 @@ export class CreateDataForm extends Component {
           <FontAwesome
             onClick={
               this.props.className === 'create_monster' ?
-              this.props.handleToggleCreateMonster
+              this.props.cToggleCreate
               :
               () => this.props.cToggleEdit(item.id)
             }
@@ -84,3 +91,31 @@ export class CreateDataForm extends Component {
     );
   }
 }
+
+const mapStateToDataFormContainer = (state) => (
+  {
+    filepath: state.navReducer.filepath,
+  }
+);
+
+const mapPropsToDataFormContainer = (dispatch) => (
+  {
+    cToggleCreate: () => (
+      dispatch(toggleCreate())
+    ),
+    cToggleEdit: (id) => (
+      dispatch(toggleEdit(id))
+    ),
+    createData: (data, path) => (
+      dispatch(createData(data, path))
+    ),
+    updateData: (data, path) => (
+      dispatch(updateData(data, path))
+    )
+  }
+);
+
+export const CreateDataFormContainer = connect(
+ mapStateToDataFormContainer,
+ mapPropsToDataFormContainer
+)(CreateDataForm)

@@ -5,9 +5,9 @@ import { combineReducers } from 'redux';
 const initialDataReducerState = {
   data: [],
   filterData: [],
-  fetching: false,
-  fetched: false,
-  error: null,
+  fetchingData: false,
+  fetchedData: false,
+  fetchingDataError: null,
   toggleCreate: false,
 }
 
@@ -24,7 +24,9 @@ export const reducer = combineReducers({
 function dataReducer(state = initialDataReducerState, action) {
   switch (action.type) {
     case 'TOGGLE_DETAILS':
-    case 'TOGGLE_EDIT': {
+    case 'TOGGLE_EDIT':
+    case 'CREATE_DATA':
+    case 'UPDATE_DATA': {
       return {
         ...state,
         data: handleDataReducer(state.data, action),
@@ -40,16 +42,16 @@ function dataReducer(state = initialDataReducerState, action) {
 
     // SERVER REQUESTS
     case 'GET_SERVER_DATA_PENDING': {
-      return {...state, fetching: true, fetched: false,}
+      return {...state, fetchingData: true, fetchedData: false,}
     }
     case 'GET_SERVER_DATA_REJECTED': {
-      return {...state, fetching:false, fetched: false, error: action.payload}
+      return {...state, fetchingData:false, fetchedData: false, fetchingDataError: action.payload}
     }
     case 'GET_SERVER_DATA_FULFILLED': {
       return {
         ...state,
-        fetching: false,
-        fetched: true,
+        fetchingData: false,
+        fetchedData: true,
         data: handleDataReducer(state.data, action),
         filterData: handleDataReducer(state.filterData, action),
       }
@@ -63,7 +65,8 @@ function dataReducer(state = initialDataReducerState, action) {
 function findIndex(state, action) {
   switch (action.type) {
     case 'TOGGLE_DETAILS':
-    case 'TOGGLE_EDIT': {
+    case 'TOGGLE_EDIT':
+    case 'UPDATE_DATA': {
       return state.findIndex(
         d => d.id === action.id
       );
@@ -90,6 +93,11 @@ function handleDataReducer(state, action) {
         ...state.slice(itemIndex +1, state.length),
       ];
     }
+    case 'CREATE_DATA': {
+
+    }
+
+    // Server Stuff
     case 'GET_SERVER_DATA_FULFILLED': {
       return action.payload;
     }

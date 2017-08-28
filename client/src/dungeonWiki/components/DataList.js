@@ -1,21 +1,6 @@
-//import React, { Component } from 'react';
-import { connect } from 'react-redux'
+import { connect } from 'react-redux';
 import { Data } from './Data';
-
-function toggleDetails(id) {
-  return {
-    type: 'TOGGLE_DETAILS',
-    id: id,
-  }
-}
-
-function toggleEdit(id) {
-  console.log(id);
-  return {
-    type: 'TOGGLE_EDIT',
-    id: id,
-  }
-}
+import { toggleDetails, toggleEdit } from '../actions/wikiActions';
 
 const mapToStateDataList = (state) => {
   const list = state.dataReducer.data.map(item => {

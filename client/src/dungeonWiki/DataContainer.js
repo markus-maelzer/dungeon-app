@@ -2,7 +2,8 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 //import { ReduxContainer } from './ReduxContainer';
 
-import { getServerData } from '../actions/userActions';
+import { getServerData } from './actions/userActions';
+import { toggleCreate } from './actions/wikiActions';
 
 import { NavContainer } from '../nav/NavContainer';
 import { DataList } from './components/DataList';
@@ -35,17 +36,10 @@ export class DataContainer extends Component {
   }
 }
 
-const toggleCreate = () => (
-  {
-    type: 'TOGGLE_CREATE'
-  }
-)
-
-
 const mapStateToReduxContainer = (state) => (
   {
     filepath: state.navReducer.filepath,
-    data: state.dataReducer.data[0],
+    data: state.dataReducer.data,
     toggleCreate: state.dataReducer.toggleCreate,
   }
 );
