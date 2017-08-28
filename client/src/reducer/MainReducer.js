@@ -6,10 +6,11 @@ const dataReducerState = {
   data: [],
   filterData: [],
   toggleNav: true,
-  filepath: null,
+  filepath: 'monster',
   fetching: false,
   fetched: false,
   error: null,
+  toggleCreate: false,
 }
 
 export const reducer = combineReducers({
