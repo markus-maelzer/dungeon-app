@@ -25,7 +25,7 @@ const mapToStateDataList = (state) => {
     })
     return object;
   })
-  console.log(list);
+
   return {
     list,
   };

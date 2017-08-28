@@ -37,10 +37,10 @@ export class App extends Component {
         <Router>
           <Switch>
             <Route exact path='/' render={(props) => (
-              <ReduxContainer {...props} filePath='' />
+              <ReduxContainer {...props} />
             )} />
             <Route exact path='/monster' render={(props) => (
-              <ReduxContainer {...props} filePath='monster' />
+              <ReduxContainer {...props} />
             )} />
           </Switch>
         </Router>

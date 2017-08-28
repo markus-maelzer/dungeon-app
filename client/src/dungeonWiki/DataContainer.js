@@ -11,12 +11,12 @@ import { ToggleCreateDataForm } from './components/ToggleCreateDataForm';
 
 export class DataContainer extends Component {
   componentWillMount() {
-    this.props.getServerData();
+    this.props.getServerData(this.props.filepath);
   }
   componentWillReceiveProps(nextProps) {
-    console.log(nextProps);
-
-  //  this.props.getServerData();
+    if(nextProps.filepath !== this.props.filepath) {
+      this.props.getServerData(nextProps.filepath);
+    }
   }
   render() {
     return (
@@ -37,8 +37,8 @@ const mapStateToReduxContainer = (state) => (
 
 const mapDispatchToReduxContainer = (dispatch) => (
   {
-    getServerData: () => {
-      dispatch(getServerData());
+    getServerData: (filepath) => {
+      dispatch(getServerData(filepath));
     }
   }
 );

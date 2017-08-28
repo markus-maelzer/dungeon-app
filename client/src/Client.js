@@ -15,7 +15,7 @@ function changeFilePath(path) {
   return fetch('api/filepath' , {
     method: 'post',
     body: JSON.stringify({
-      filePath: path
+      filepath: path
     }),
     headers: {
       'Accept': 'application/json',
@@ -29,7 +29,7 @@ function createData(data, path) {
     method: 'post',
     body: JSON.stringify({
       data: data,
-      filePath: path
+      filepath: path
     }),
     headers: {
       'Accept': 'application/json',
@@ -43,7 +43,7 @@ function updateData(data, path) {
     method: 'put',
     body: JSON.stringify({
       data: data,
-      filePath: path
+      filepath: path
     }),
     headers: {
       'Accept': 'application/json',
@@ -57,7 +57,7 @@ function deleteData(data, path) {
     method: 'delete',
     body: JSON.stringify({
       data: data,
-      filePath: path
+      filepath: path
     }),
     headers: {
       'Accept': 'application/json',
