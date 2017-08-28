@@ -25,14 +25,15 @@ server.listen(port, function () {
 
 // in testing
 app.post('/api/filepath', (req, res) => {
-  DATA_FILE = filePath(req.body.filePath);
-  console.log('get/filepath: \n' + DATA_FILE);
+  DATA_FILE = filepath(req.body.filepath);
+//  console.log('get/filepath: \n' + DATA_FILE);
+  res.json({success: 'success'})
 });
 
 
 let DATA_FILE = path.join(__dirname , 'data/monster.json');
 app.get('/api/dungeon', (req, res) => {
-  console.log('get/dungeon: \n' + DATA_FILE);
+//  console.log('get/dungeon: \n' + DATA_FILE);
   fs.readFile(DATA_FILE, (err, data) => {
     res.setHeader('Cache-Control', 'no-cache');
     res.json(JSON.parse(data));
@@ -40,7 +41,7 @@ app.get('/api/dungeon', (req, res) => {
 });
 
 app.post('/api/dungeon', (req, res) => {
-  const fileName = filePath(req.body.filePath);
+  const fileName = filepath(req.body.filepath);
   fs.readFile(fileName, (err, data) => {
     const monster = JSON.parse(data);
     const newMonster = createData(req.body.data);
@@ -54,7 +55,7 @@ app.post('/api/dungeon', (req, res) => {
 });
 
 app.put('/api/dungeon', (req, res) => {
-  const fileName = filePath(req.body.filePath);
+  const fileName = filepath(req.body.filepath);
   fs.readFile(fileName, (err, data) => {
     const monster = JSON.parse(data);
     const updatedData = updateData(req.body.data, monster);
@@ -66,7 +67,7 @@ app.put('/api/dungeon', (req, res) => {
 });
 
 app.delete('/api/dungeon', (req, res) => {
-  const fileName = filePath(req.body.filePath);
+  const fileName = filepath(req.body.filepath);
   fs.readFile(fileName, (err, data) => {
     const fileData = JSON.parse(data);
   })
@@ -104,7 +105,7 @@ const dataFiles = [
   'npcs'
 ]
 
-function filePath(fileName) {
+function filepath(fileName) {
     return path.join(__dirname , 'data/'+ fileName +'.json');
 }
 
