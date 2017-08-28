@@ -1,9 +1,5 @@
 import React, { Component } from 'react';
 
-export class AddButton extends Component {
-  render() {
-    return (
-      <button className="add_monster" onClick={this.props.handleToggleCreateMonster} >Add Monster</button>
-    );
-  }
-}
+export const AddButton = (props) => (
+    <button className="add_monster" onClick={props.cToggleCreate} >Add Monster</button>
+)

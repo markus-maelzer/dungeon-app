@@ -1,8 +1,8 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { CreateDataForm } from './CreateDataForm';
 import FontAwesome from 'react-fontawesome';
-
-export class DataDetails extends Component {
+/*
+export class DataDetailss extends Component {
   state = {
     toggleEdit: false,
   }
@@ -57,10 +57,9 @@ export class DataDetails extends Component {
 
           <div className="details_toolbar">
             <FontAwesome onClick={this.handleToggleEdit} name='pencil-square' />
-            <FontAwesome onClick={this.props.handleToggleDetails} name='times-circle' />
-            <FontAwesome onCLick={this.handleDelete} name='trash' />
+            <FontAwesome onClick={this.props.cToggleDetails} name='times-circle' />
+            <FontAwesome onClick={this.props.cToggleDetails} name='trash' />
           </div>
-
         </div>
       );
     } else {
@@ -95,5 +94,52 @@ export class DataDetails extends Component {
         />
       );
     }
+  }
+}
+*/
+
+export const DataDetails = (props) => {
+  const item = props.itemData;
+  if (!item.toggleEdit) {
+    return (
+      <div className='monster monster-details'>
+        {
+          Object.getOwnPropertyNames(item).map((prop, i) => {
+            switch (prop) {
+              case 'name': {
+                return (
+                  <h2 key={i}>{item[prop]}</h2>
+                );
+              }
+              case 'dungeon_floor': {
+                return (
+                  <p key={i}>DF: {item[prop]}</p>
+                );
+              }
+              case 'id':
+              case 'toggleDetails':
+              case 'toggleEdit': {
+                return null;
+              }
+              default: {
+                return (
+                  <p key={i}>{prop}: {item[prop]}</p>
+                );
+              }
+            }
+          })
+        }
+        <div className="details_toolbar">
+          <FontAwesome onClick={() => props.cToggleEdit(item.id)} name='pencil-square' />
+          <FontAwesome onClick={() => props.cToggleDetails(item.id)} name='times-circle' />
+          <FontAwesome  name='trash' />
+        </div>
+      </div>
+    );
+  } else {
+    return <CreateDataForm
+      key={props.keyProp}
+      itemData={item}
+      cToggleEdit={props.cToggleEdit} />
   }
 }

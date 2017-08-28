@@ -1,19 +1,19 @@
 //import React, { Component } from 'react';
 import { connect } from 'react-redux'
-
 import { Data } from './Data';
 
-function toggleDetails(toggle) {
+function toggleDetails(id) {
   return {
     type: 'TOGGLE_DETAILS',
-    toggle: toggle,
+    id: id,
   }
 }
 
-function toggleEdit(toggle) {
+function toggleEdit(id) {
+  console.log(id);
   return {
     type: 'TOGGLE_EDIT',
-    toggle: toggle,
+    id: id,
   }
 }
 
@@ -31,18 +31,16 @@ const mapToStateDataList = (state) => {
   };
 }
 
-
 const mapToPropsDataList = (dispatch) => (
   {
-    toggleDetails: (curBool) => (
-      dispatch(toggleDetails(curBool))
+    cToggleDetails: (id) => (
+      dispatch(toggleDetails(id))
     ),
-    toggleEdit: (curBool) => (
-      dispatch(toggleEdit(curBool))
+    cToggleEdit: (id) => (
+      dispatch(toggleEdit(id))
     )
   }
 )
-
 
 export const DataList = connect(
   mapToStateDataList,

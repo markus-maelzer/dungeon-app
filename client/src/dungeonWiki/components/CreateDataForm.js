@@ -4,36 +4,7 @@ const uuidv1 = require('uuid/v1');
 
 export class CreateDataForm extends Component {
 
-  state = {
-    name: this.props.name || '',
-    dungeon_floor: this.props.dungeon_floor || '',
-    challenge: this.props.challenge || '',
-    leben: this.props.leben || '',
-    waffen: this.props.waffen || '',
-    rüstung: this.props.rüstung || '',
-    zäheit: this.props.zäheit || '',
-    schwäche: this.props.schwäche || '',
-    resistenzen: this.props.resistenzen || '',
-    immunitäten: this.props.immunitäten || '',
-    größe: this.props.größe || '',
-    beschreibung: this.props.beschreibung || '',
-    besonderheiten: this.props.besonderheiten || '',
-    skills: this.props.skills || '',
-    skill_multiplikator: this.props.skill_multiplikator || '',
-    movement_speed: this.props.movement_speed || '',
-    dmg_multiplikator: this.props.dmg_multiplikator || '',
-    trefferrate: this.props.trefferrate || '',
-
-  }
-
-  static defaultProps = {
-    categorys: [
-      'name', 'dungeon_floor', 'challenge', 'leben',
-      'waffen', 'rüstung', 'zäheit', 'schwäche', 'resistenzen',
-      'immunitäten', 'größe', 'beschreibung', 'besonderheiten',
-      'skills', 'skill_multiplikator', 'movement_speed', 'dmg_multiplikator', 'trefferrate'
-    ]
-  }
+  state = this.props.itemData;
 
   handleInputChange = (data) => (e) => {
     this.setState({
@@ -65,15 +36,25 @@ export class CreateDataForm extends Component {
   }
 
   render() {
-    const inputs = this.props.categorys.map((category, i) => {
-      return (
-        <div key={i} className='category'>
-          <h3>{category}</h3>
-          <input type='text' value={this.state[category]}
-            onChange={this.handleInputChange(category)}
-          />
-        </div>
-      );
+    const item = this.props.itemData;
+    const inputs = Object.getOwnPropertyNames(item).map((category, i) => {
+      switch (category) {
+        case 'id':
+        case 'toggleDetails':
+        case 'toggleEdit': {
+          return null;
+        }
+        default: {
+          return (
+            <div key={i} className='category'>
+              <h3>{category}</h3>
+              <input type='text' value={this.state[category]}
+                onChange={this.handleInputChange(category)}
+              />
+            </div>
+          );
+        }
+      }
     });
 
     const buttonText = this.props.id ? 'Update' : 'Create';
@@ -90,7 +71,12 @@ export class CreateDataForm extends Component {
         </button>
         <div className="details_toolbar">
           <FontAwesome
-            onClick={this.props.className === 'create_monster' ? this.props.handleToggleCreateMonster : this.props.handleToggleEdit}
+            onClick={
+              this.props.className === 'create_monster' ?
+              this.props.handleToggleCreateMonster
+              :
+              () => this.props.cToggleEdit(item.id)
+            }
             name='times-circle'
           />
         </div>

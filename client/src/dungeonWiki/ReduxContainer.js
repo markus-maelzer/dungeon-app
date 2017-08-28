@@ -98,7 +98,7 @@ export class ReduxContainer extends Component {
         <DataList
           monsterList={this.state.filteredMonsterList}
           onFormSubmit={this.handleEditFormSubmit}
-         />
+        />
         <ToggleCreateDataForm
           onFormSubmit={this.handleCreateFormSubmit}
         />

@@ -2,22 +2,137 @@
 import { combineReducers } from 'redux';
 
 //initial States
-const dataReducerState = {
+const initialDataReducerState = {
   data: [],
   filterData: [],
-  toggleNav: true,
-  filepath: 'monster',
   fetching: false,
   fetched: false,
   error: null,
   toggleCreate: false,
 }
 
+const initialNavReducerState = {
+  toggleNav: true,
+  filepath: 'monster',
+}
+
 export const reducer = combineReducers({
   dataReducer,
+  navReducer,
 });
 
-function dataReducer(state = dataReducerState, action) {
+function dataReducer(state = initialDataReducerState, action) {
+  switch (action.type) {
+    case 'TOGGLE_DETAILS':
+    case 'TOGGLE_EDIT': {
+      return {
+        ...state,
+        data: handleDataReducer(state.data, action),
+        filterData: handleDataReducer(state.filterData, action),
+      }
+    }
+    case 'TOGGLE_CREATE' : {
+      return {
+        ...state,
+        toggleCreate: !state.toggleCreate,
+      }
+    }
+
+    // SERVER REQUESTS
+    case 'GET_SERVER_DATA_PENDING': {
+      return {...state, fetching: true, fetched: false,}
+    }
+    case 'GET_SERVER_DATA_REJECTED': {
+      return {...state, fetching:false, fetched: false, error: action.payload}
+    }
+    case 'GET_SERVER_DATA_FULFILLED': {
+      return {
+        ...state,
+        fetching: false,
+        fetched: true,
+        data: handleDataReducer(state.data, action),
+        filterData: handleDataReducer(state.filterData, action),
+      }
+    }
+    default: {
+      return state;
+    }
+  }
+}
+
+function findIndex(state, action) {
+  switch (action.type) {
+    case 'TOGGLE_DETAILS':
+    case 'TOGGLE_EDIT': {
+      return state.findIndex(
+        d => d.id === action.id
+      );
+    }
+
+    default: {
+      return state;
+    }
+  }
+}
+
+function handleDataReducer(state, action) {
+  switch (action.type) {
+    case 'TOGGLE_DETAILS':
+    case 'TOGGLE_EDIT' : {
+      const itemIndex = findIndex(state, action);
+
+      const oldItem = state[itemIndex];
+      const newItem = createNewItem(oldItem, action);
+
+      return [
+        ...state.slice(0, itemIndex),
+        newItem,
+        ...state.slice(itemIndex +1, state.length),
+      ];
+    }
+    case 'GET_SERVER_DATA_FULFILLED': {
+      return action.payload;
+    }
+    default: {
+      return state;
+    }
+  }
+}
+
+function createNewItem(oldItem, action) {
+  switch (action.type) {
+    case 'TOGGLE_DETAILS': {
+      return {
+        ...oldItem,
+        toggleDetails: !oldItem.toggleDetails
+      };
+    }
+    case 'TOGGLE_EDIT': {
+      console.log(oldItem);
+      return {
+        ...oldItem,
+        toggleEdit: !oldItem.toggleEdit
+      };
+    }
+    default:
+
+  }
+}
+
+
+function checkFilepath(state, action) {
+  switch (action.filepath) {
+    case 'toggle' :
+    case 'home' : {
+      return state.filepath;
+    }
+    default : {
+      return action.filepath;
+    }
+  }
+}
+
+function navReducer(state = initialNavReducerState, action) {
   switch (action.type) {
     case 'CLICK_LINK': {
       var filepath = checkFilepath(state, action);
@@ -32,42 +147,12 @@ function dataReducer(state = dataReducerState, action) {
           ...state,
           toggleNav: !state.toggleNav,
           filepath: filepath,
-          fetching: false,
-          fetched: false,
         }
-      }
-    }
-    case 'TOGGLE_NAV': {
-      return state;
-    }
-    case 'GET_SERVER_DATA_PENDING': {
-      return {...state, fetching: true}
-    }
-    case 'GET_SERVER_DATA_REJECTED': {
-      return {...state, fetching:false, error: action.payload}
-    }
-    case 'GET_SERVER_DATA_FULFILLED': {
-      return {
-        ...state,
-        fetching: false,
-        fetched: true,
-        data: action.payload,
       }
     }
     default: {
       return state;
     }
-  }
-}
 
-function checkFilepath(state, action) {
-  switch (action.filepath) {
-    case 'toggle' :
-    case 'home' : {
-      return state.filepath;
-    }
-    default : {
-      return action.filepath;
-    }
   }
 }

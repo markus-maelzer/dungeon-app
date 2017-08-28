@@ -22,11 +22,9 @@ server.listen(port, function () {
 
 
 
-
-// in testing
 app.post('/api/filepath', (req, res) => {
   DATA_FILE = filepath(req.body.filepath);
-//  console.log('get/filepath: \n' + DATA_FILE);
+  console.log('get/filepath: \n' + DATA_FILE);
   res.json({success: 'success'})
 });
 

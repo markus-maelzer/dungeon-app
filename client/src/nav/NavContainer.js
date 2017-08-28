@@ -23,6 +23,7 @@ const NavBar = (props) => (
           <ul>
             <li onClick={() => props.toggleNavBar('home')}><NavLink to='/' ><span>Home</span></NavLink></li>
             <li onClick={() => props.toggleNavBar('monster')}><NavLink to='/monster' ><span>Monster</span></NavLink></li>
+            <li onClick={() => props.toggleNavBar('items')}><NavLink to='/items' ><span>Items</span></NavLink></li>
           </ul>
         </div>
       )
@@ -33,7 +34,7 @@ const NavBar = (props) => (
 
 const mapToStateNavContainer = (state) => (
   {
-    toggleNav: state.dataReducer.toggleNav,
+    toggleNav: state.navReducer.toggleNav,
   }
 )
 

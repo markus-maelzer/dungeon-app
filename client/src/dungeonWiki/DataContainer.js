@@ -13,33 +13,51 @@ export class DataContainer extends Component {
   componentWillMount() {
     this.props.getServerData(this.props.filepath);
   }
+
   componentWillReceiveProps(nextProps) {
     if(nextProps.filepath !== this.props.filepath) {
       this.props.getServerData(nextProps.filepath);
     }
   }
+
   render() {
     return (
       <div className='data_container'>
         <DataList />
-        <ToggleCreateDataForm />
+        <ToggleCreateDataForm
+          itemData={this.props.data}
+          cToggleCreate={this.props.cToggleCreate}
+          toggleCreate={this.props.toggleCreate}
+        />
         <NavContainer />
       </div>
     );
   }
 }
 
+const toggleCreate = () => (
+  {
+    type: 'TOGGLE_CREATE'
+  }
+)
+
+
 const mapStateToReduxContainer = (state) => (
   {
-    filepath: state.dataReducer.filepath,
+    filepath: state.navReducer.filepath,
+    data: state.dataReducer.data[0],
+    toggleCreate: state.dataReducer.toggleCreate,
   }
 );
 
 const mapDispatchToReduxContainer = (dispatch) => (
   {
-    getServerData: (filepath) => {
-      dispatch(getServerData(filepath));
-    }
+    getServerData: (filepath) => (
+      dispatch(getServerData(filepath))
+    ),
+    cToggleCreate: () => (
+      dispatch(toggleCreate())
+    )
   }
 );
 

@@ -42,6 +42,9 @@ export class App extends Component {
             <Route exact path='/monster' render={(props) => (
               <ReduxContainer {...props} />
             )} />
+            <Route exact path='/items' render={(props) => (
+              <ReduxContainer {...props} />
+            )} />
           </Switch>
         </Router>
       </Provider>
