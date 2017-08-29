@@ -29,7 +29,6 @@ const store = createStore(
   compose(middleware, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__())
 );
 
-
 export class App extends Component {
   render () {
     return (
@@ -51,8 +50,6 @@ export class App extends Component {
     )
   }
 }
-
-
 
 ReactDOM.render(<App />, document.getElementById('root'));
 registerServiceWorker();
