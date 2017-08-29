@@ -1,33 +1,58 @@
 import React, { Component } from 'react';
 import FontAwesome from 'react-fontawesome';
+import { connect } from 'react-redux';
 
-export class SearchBar extends Component {
-  state = {
-    filter: this.props.filter || 'name',
+export const SearchBar = (props) => (
+  <div className='search_bar'>
+    <FontAwesome name='search' />
+    <input
+      onChange={(e) => props.searchData(e.target.value)}
+    />
+    <select>
+    {
+      props.dataProps.map((item, i) => {
+        if(item.search('_') !== -1) {
+          return ( <option key={i} value={item}>{item}</option> );
+        } else {
+          return ( <option key={i} value={item}>{item}</option> );
+        }
+      })
+    }
+    </select>
+  </div>
+)
+
+const searchData = (text) => (
+  {
+    type: 'SEARCH_DATA',
+    text: text,
   }
-
-  filterList = (e) =>{
-    var updatedList = this.props.initialItems;
-    var filter = this.state.filter;
-
-    updatedList = updatedList.filter(function(item){
-      return item[filter].toLowerCase().search(
-        e.target.value.toLowerCase()) !== -1;
-    });
-
-    //console.log(updatedList);
-
-    this.props.searchForMonster(updatedList)
+)
+const changeSearchBy = (text ) => (
+  {
+    type: 'CHANGE_SEARCH_BY',
+    text: text,
   }
+)
 
-  render() {
-    return (
-      <div className='search_bar'>
-        <FontAwesome name='search' />
-        <input
-          onChange={this.filterList}
-        />
-      </div>
+const mapToStateSearchBarContainer = (state) => (
+  {
+    dataProps: state.dataReducer.dataProps,
+  }
+)
+
+const mapToPropsSearchBarContainer = (dispatch) => (
+  {
+    searchData: (text) => (
+      dispatch(searchData(text))
+    ),
+    changeSearchBy: (text) => (
+      dispatch(changeSearchBy(text))
     )
   }
-}
+)
+
+export const SearchBarContainer = connect(
+  mapToStateSearchBarContainer,
+  mapToPropsSearchBarContainer
+)(SearchBar)

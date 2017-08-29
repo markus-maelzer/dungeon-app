@@ -41,20 +41,29 @@ h1, h2, h3, h4, h5, h6, p, ul, li, a {
   top: 0;
 }
 
+.nav .close_nav {
+  width: 50px;
+  height: 50px;
+  position: absolute;
+  font-size: 38px;
+  left: 4px;
+  top: 4px;
+  cursor: pointer;
+}
+
 .nav ul {
   list-style-type: none;
 }
 
 .nav ul li {
-  display: block;
   text-align: center;
 }
 
 .nav ul li a {
   text-decoration: none;
   color: #ffada7;
-  display: block;
   font-size: 36pt;
+  width: auto;
 }
 
 .nav ul li a span {

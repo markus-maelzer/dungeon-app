@@ -1,8 +1,10 @@
 const initialDataReducerState = {
   data: [],
   filterData: [],
-  fetchStatus: fetchStatusReducer,
+  dataProps: [],
+  fetchStatus: fetchStatusReducer(undefined, {}),
   toggleCreate: false,
+  searchBy: 'name',
 }
 
 export function dataReducer(state = initialDataReducerState, action) {
@@ -24,20 +26,51 @@ export function dataReducer(state = initialDataReducerState, action) {
       }
     }
 
+    case 'SEARCH_DATA': {
+      return {
+        ...state,
+        filterData: searchData(state, action),
+      }
+    }
+
     // SERVER REQUESTS
     case 'GET_SERVER_DATA_PENDING': {
-      return {...state, fetchStatus: fetchStatusReducer(state, action)}
+      return {...state, fetchStatus: fetchStatusReducer(state.fetchStatus, action)}
     }
     case 'GET_SERVER_DATA_REJECTED': {
-      return {...state, fetchStatus: fetchStatusReducer(state, action)}
+      return {...state, fetchStatus: fetchStatusReducer(state.fetchStatus, action)}
     }
     case 'GET_SERVER_DATA_FULFILLED': {
       return {
-        fetchStatus: fetchStatusReducer(state, action),
+        ...state,
+        fetchStatus: fetchStatusReducer(state.fetchStatus, action),
         data: handleDataReducer(state.data, action),
         filterData: handleDataReducer(state.filterData, action),
+        dataProps: getDataProps(state.dataProps, action),
       }
     }
+    default: {
+      return state;
+    }
+  }
+}
+
+function searchData(state, action) {
+  switch (action.type) {
+    case 'SEARCH_DATA': {
+      var updatedList = state.data;
+      console.log(state);
+      var filter = state.searchBy;
+
+      updatedList = updatedList.filter(item => {
+        return item[filter].toLowerCase().search(
+          action.text.toLowerCase()) !== -1;
+      });
+
+      return updatedList;
+    }
+
+
     default: {
       return state;
     }
@@ -56,16 +89,16 @@ function fetchStatusReducer(state = {
     case 'GET_SERVER_DATA_REJECTED': {
       return {
         ...state,
-        fetchingData:false,
-         fetchedData: false,
-         fetchingDataError: action.payload
+        fetching:false,
+        fetched: false,
+        error: action.payload
       }
     }
     case 'GET_SERVER_DATA_FULFILLED': {
       return {
         ...state,
-        fetchingData: false,
-        fetchedData: true,
+        fetching: false,
+        fetched: true,
       }
     }
 
@@ -136,7 +169,11 @@ function createNewItem(oldItem, action) {
         toggleEdit: !oldItem.toggleEdit
       };
     }
-    default:
+  }
+}
 
+function getDataProps(state, action) {
+  if (action.type === 'GET_SERVER_DATA_FULFILLED') {
+    return Object.getOwnPropertyNames(action.payload[0]);
   }
 }

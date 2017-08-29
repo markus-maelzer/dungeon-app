@@ -48,7 +48,7 @@
   width: 100%;
 }
 
-.form .category:first-child, .form .category:nth-child(2) {
+.form .category:first-child {
   margin-top: 15px;
 }
 
@@ -99,6 +99,10 @@
 .create_monster .category {
   margin: 4px 4px;
   width: 45%;
+}
+
+.create_monster .category:nth-child(2) {
+  margin-top: 15px;
 }
 
 .details_toolbar {

@@ -26,7 +26,7 @@ export class DataContainer extends Component {
       <div className='data_container'>
         <DataList />
         <ToggleCreateDataForm
-          itemData={this.props.data}
+          itemData={this.props.dataProps}
           cToggleCreate={this.props.cToggleCreate}
           toggleCreate={this.props.toggleCreate}
         />
@@ -39,7 +39,7 @@ export class DataContainer extends Component {
 const mapStateToReduxContainer = (state) => (
   {
     filepath: state.navReducer.filepath,
-    data: state.dataReducer.data,
+    dataProps: state.dataReducer.dataProps,
     toggleCreate: state.dataReducer.toggleCreate,
   }
 );

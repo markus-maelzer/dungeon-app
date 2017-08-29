@@ -6,7 +6,7 @@ export class ToggleCreateDataForm extends Component {
   render() {
     const item = {};
     if(this.props.itemData.length > 0) {
-      Object.getOwnPropertyNames(this.props.itemData[1]).forEach(prop => {
+      this.props.itemData.forEach(prop => {
         switch (prop) {
           case 'toggleDetails':
           case 'toggleEdit': {

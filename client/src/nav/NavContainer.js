@@ -1,7 +1,9 @@
 import React from 'react';
-import { SearchBar } from './SearchBar';
 import { NavLink } from 'react-router-dom';
 import { connect } from 'react-redux';
+
+import { SearchBarContainer } from './SearchBar';
+import FontAwesome from 'react-fontawesome';
 
 const NavBar = (props) => (
   <div className={props.toggleNav ? "sort_bar" : "sort_bar_extended"} >
@@ -13,7 +15,7 @@ const NavBar = (props) => (
           <div></div>
           <div></div>
         </div>
-        <SearchBar
+        <SearchBarContainer
           /*searchForMonster={this.props.searchForMonster}
           initialItems={this.props.initialItems}*/
         />
@@ -21,10 +23,11 @@ const NavBar = (props) => (
       ) : (
         <div className='nav'>
           <ul>
-            <li onClick={() => props.toggleNavBar('home')}><NavLink to='/' ><span>Home</span></NavLink></li>
-            <li onClick={() => props.toggleNavBar('monster')}><NavLink to='/monster' ><span>Monster</span></NavLink></li>
-            <li onClick={() => props.toggleNavBar('items')}><NavLink to='/items' ><span>Items</span></NavLink></li>
+            <li><NavLink to='/'><span onClick={() => props.toggleNavBar('home')}>Home</span></NavLink></li>
+            <li><NavLink to='/monster'><span onClick={() => props.toggleNavBar('monster')}>Monster</span></NavLink></li>
+            <li><NavLink to='/items'><span onClick={() => props.toggleNavBar('items')}>Items</span></NavLink></li>
           </ul>
+          <FontAwesome className='close_nav' onClick={() => props.toggleNavBar('home')} name='times-circle' />
         </div>
       )
     }
