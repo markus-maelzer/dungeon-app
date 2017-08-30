@@ -59,7 +59,7 @@ app.put('/api/dungeon', (req, res) => {
     const updatedData = updateData(req.body.data, monster);
 
     fs.writeFile(fileName, JSON.stringify(updatedData, null, 2), () => {
-      res.json({});
+      res.json(updatedData);
     });
   });
 });
@@ -95,7 +95,15 @@ function updateData(req, attr) {
     // switch data from req body with the object data
     if (object.id === req.id) {
       Object.getOwnPropertyNames(object).forEach(prop => {
-        object[prop] = req[prop];
+        switch (prop) {
+          case 'toggleDetails':
+          case 'toggleEdit': {
+            return object[prop] = false;
+          }
+          default: {
+            return object[prop] = req[prop];
+          }
+        }
       });
     }
   });

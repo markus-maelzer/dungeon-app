@@ -11,8 +11,7 @@ const initialDataReducerState = {
 export function dataReducer(state = initialDataReducerState, action) {
   switch (action.type) {
     case 'TOGGLE_DETAILS':
-    case 'TOGGLE_EDIT':
-    case 'UPDATE_DATA': {
+    case 'TOGGLE_EDIT': {
       return {
         ...state,
         data: handleDataReducer(state.data, action),
@@ -42,10 +41,12 @@ export function dataReducer(state = initialDataReducerState, action) {
       }
     }
 
-    case 'DELETE_DATA_PENDING': {
+    case 'DELETE_DATA_PENDING':
+    case 'UPDATE_DATA_PENDING': {
       return state;
     }
-    case 'DELETE_DATA_FULFILLED': {
+    case 'DELETE_DATA_FULFILLED':
+    case 'UPDATE_DATA_FULFILLED':  {
       console.log(action.payload);
       return {
         ...state,
@@ -147,8 +148,7 @@ function fetchStatusReducer(state = {
 function findIndex(state, action) {
   switch (action.type) {
     case 'TOGGLE_DETAILS':
-    case 'TOGGLE_EDIT':
-    case 'UPDATE_DATA': {
+    case 'TOGGLE_EDIT': {
       return state.findIndex(
         d => d.id === action.id
       );
@@ -174,9 +174,6 @@ function handleDataReducer(state, action) {
         newItem,
         ...state.slice(itemIndex +1, state.length),
       ];
-    }
-    case 'CREATE_DATA_FULFILLED': {
-      return state.concat(action.payload[(action.payload.length - 1)]);
     }
 
     // Server Stuff

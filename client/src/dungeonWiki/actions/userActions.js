@@ -61,7 +61,7 @@ export const updateData = (data, path) => {
             filepath: path,
           })
           .then(response => {
-            resolve(response)
+            resolve(response.data)
           })
           .catch(error => {
             rejected(error)
