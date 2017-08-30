@@ -95,3 +95,78 @@ h1, h2, h3, h4, h5, h6, p, ul, li, a {
 .nav ul li a span:hover:before, .nav ul li a span:hover:after {
   width: 50vw;
 }
+
+.loader_container {
+  width: 25%;
+}
+
+.loader {
+  position: relative;
+  width: 2.5em;
+  height: 2.5em;
+  transform: rotate(165deg);
+}
+
+.loader:before, .loader:after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  display: block;
+  width: 0.5em;
+  height: 0.5em;
+  border-radius: 0.25em;
+  transform: translate(-50%, -50%);
+}
+
+.loader:before {
+  animation: before 2s infinite;
+}
+
+.loader:after {
+  animation: after 2s infinite;
+}
+
+@keyframes before {
+  0% {
+    width: 0.5em;
+    box-shadow: 1em -0.5em white, -1em 0.5em white;
+  }
+  35% {
+    width: 2.5em;
+    box-shadow: 0 -0.5em white, 0 0.5em white;
+  }
+  70% {
+    width: 0.5em;
+    box-shadow: -1em -0.5em white, 1em 0.5em white;
+  }
+  100% {
+    box-shadow: 1em -0.5em white, -1em 0.5em white;
+  }
+}
+
+@keyframes after {
+  0% {
+    height: 0.5em;
+    box-shadow: 0.5em 1em white, -0.5em -1em white;
+  }
+  35% {
+    height: 2.5em;
+    box-shadow: 0.5em 0 white, -0.5em 0 white;
+  }
+  70% {
+    height: 0.5em;
+    box-shadow: 0.5em -1em white, -0.5em 1em white;
+  }
+  100% {
+    box-shadow: 0.5em 1em white, -0.5em -1em white;
+  }
+}
+
+/**
+ * Attempt to center the whole thing!
+ */
+.loader {
+  position: relative;
+  margin: 20px auto;
+}

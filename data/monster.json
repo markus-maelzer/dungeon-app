@@ -19,8 +19,8 @@
     "movement_speed": "3,5",
     "dmg_multiplikator": "0,5",
     "trefferrate": "7,5",
-    "toggleDetails":false,
-    "toggleEdit":false
+    "toggleDetails": false,
+    "toggleEdit": false
   },
   {
     "id": "c395e8e0-72b8-11e7-b550-7d401eaec841",
@@ -42,8 +42,8 @@
     "movement_speed": "",
     "dmg_multiplikator": "",
     "trefferrate": "",
-    "toggleDetails":false,
-    "toggleEdit":false
+    "toggleDetails": false,
+    "toggleEdit": false
   },
   {
     "id": "bb6a0eb0-72b0-11e7-9c20-5936e67f1e29",
@@ -66,7 +66,7 @@
     "dmg_multiplikator": "100000",
     "trefferrate": "100%",
     "toggleDetails": false,
-    "toggleEdit":false
+    "toggleEdit": false
   },
   {
     "id": "b681d610-7311-11e7-a52b-9fd97d1d7f94",
@@ -87,29 +87,6 @@
     "skill_multiplikator": "",
     "movement_speed": "",
     "dmg_multiplikator": "1",
-    "trefferrate": "",
-    "toggleDetails": false,
-    "toggleEdit": false
-  },
-  {
-    "id": "14f3fe60-73e1-11e7-b543-8ba62fb7c0be",
-    "name": "asdfadsf",
-    "dungeon_floor": "",
-    "challenge": "",
-    "leben": "",
-    "waffen": "",
-    "rüstung": "",
-    "zäheit": "",
-    "schwäche": "",
-    "resistenzen": "",
-    "immunitäten": "",
-    "größe": "",
-    "beschreibung": "",
-    "besonderheiten": "",
-    "skills": "",
-    "skill_multiplikator": "",
-    "movement_speed": "",
-    "dmg_multiplikator": "",
     "trefferrate": "",
     "toggleDetails": false,
     "toggleEdit": false

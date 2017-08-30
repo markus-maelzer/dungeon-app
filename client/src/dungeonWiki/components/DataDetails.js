@@ -36,7 +36,7 @@ export const DataDetails = (props) => {
         <div className="details_toolbar">
           <FontAwesome onClick={() => props.cToggleEdit(item.id)} name='pencil-square' />
           <FontAwesome onClick={() => props.cToggleDetails(item.id)} name='times-circle' />
-          <FontAwesome name='trash' />
+          <FontAwesome onClick={() => props.deleteData(item.id, props.filepath)} name='trash' />
         </div>
       </div>
     );
@@ -44,6 +44,6 @@ export const DataDetails = (props) => {
     return <CreateDataFormContainer
       key={props.keyProp}
       itemData={item}
-      cToggleEdit={props.cToggleEdit} />
+    />
   }
 }

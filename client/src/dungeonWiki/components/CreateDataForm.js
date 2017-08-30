@@ -3,6 +3,8 @@ import FontAwesome from 'react-fontawesome';
 import uuidv1 from 'uuid/v1';
 import { connect } from 'react-redux';
 
+import { ButtonLoader } from './ButtonLoader';
+
 import { toggleCreate, toggleEdit } from '../actions/wikiActions';
 import { createData, updateData } from '../actions/userActions';
 
@@ -17,27 +19,23 @@ export class CreateDataForm extends Component {
   }
 
   handleSubmit = () => {
-    // check if submit has id
-    // if not create a new uuid
-    let id = this.state.id || '';
-    if (id === '') {
-      id = uuidv1();
-    }
-
     // save form data in the variable formData
-    let formData = {
-      id: id,
-    };
-    let categorys = this.props.categorys;
+    let formData = {};
+    let categorys = Object.getOwnPropertyNames(this.props.itemData);
     for (let i = 0; i < categorys.length; i++) {
-      formData[categorys[i]] = this.state[categorys[i]];
+      if(categorys[i] === 'id' && this.state[categorys[i]] === "") {
+        formData[categorys[i]] = uuidv1();
+      } else {
+        formData[categorys[i]] = this.state[categorys[i]];
+      }      
     }
+    console.log(formData);
 
     // pass formData as a parameter to onFormSubmit
     if(this.props.className === 'create_monster') {
-      this.props.createData(formData);
+      this.props.createData(formData, this.props.filepath);
     } else {
-      this.props.updateData(formData);
+      this.props.updateData(formData, this.props.filepath);
     }
 
   }
@@ -66,16 +64,18 @@ export class CreateDataForm extends Component {
 
     const buttonText = item.id ? 'Update' : 'Create';
     const className = this.props.className || 'updateMonster';
+
     return(
       <div className={"monster monster-details form " + className}>
         {inputs}
 
-        <button
+        <ButtonLoader
           type='submit'
           onClick={this.handleSubmit}
-        >
-          {buttonText}
-        </button>
+          toggle={this.props.toggleButtonLoader}
+          text={buttonText}
+        />
+
         <div className="details_toolbar">
           <FontAwesome
             onClick={
@@ -95,6 +95,7 @@ export class CreateDataForm extends Component {
 const mapStateToDataFormContainer = (state) => (
   {
     filepath: state.navReducer.filepath,
+    toggleButtonLoader: state.dataReducer.toggleButtonLoader,
   }
 );
 

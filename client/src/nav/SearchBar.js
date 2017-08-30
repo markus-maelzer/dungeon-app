@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import FontAwesome from 'react-fontawesome';
 import { connect } from 'react-redux';
 
@@ -8,11 +8,13 @@ export const SearchBar = (props) => (
     <input
       onChange={(e) => props.searchData(e.target.value)}
     />
-    <select>
+    <select onChange={(e) => props.changeSearchBy(e.target.value)}>
     {
       props.dataProps.map((item, i) => {
         if(item.search('_') !== -1) {
-          return ( <option key={i} value={item}>{item}</option> );
+          return ( <option key={i} value={item}>{item.replace('_',' ')}</option> );
+        } else if (item === 'id' || item === 'toggleEdit' || item === 'toggleDetails') {
+          return null;
         } else {
           return ( <option key={i} value={item}>{item}</option> );
         }
@@ -28,7 +30,7 @@ const searchData = (text) => (
     text: text,
   }
 )
-const changeSearchBy = (text ) => (
+const changeSearchBy = (text) => (
   {
     type: 'CHANGE_SEARCH_BY',
     text: text,

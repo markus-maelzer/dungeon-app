@@ -10,10 +10,10 @@ export class ToggleCreateDataForm extends Component {
         switch (prop) {
           case 'toggleDetails':
           case 'toggleEdit': {
-            item[prop] = false;
+            return item[prop] = false;
           }
           default : {
-            item[prop] = '';
+            return item[prop] = '';
           }
         }
       })

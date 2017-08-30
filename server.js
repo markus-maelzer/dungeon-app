@@ -67,8 +67,15 @@ app.put('/api/dungeon', (req, res) => {
 app.delete('/api/dungeon', (req, res) => {
   const fileName = filepath(req.body.filepath);
   fs.readFile(fileName, (err, data) => {
-    const fileData = JSON.parse(data);
-  })
+    let fileData = JSON.parse(data);
+    fileData = fileData.filter(d => {
+      return d.id !== req.body.id;
+    });
+
+    fs.writeFile(fileName, JSON.stringify(fileData, null, 2), () => {
+      res.json(fileData);
+    });
+  });
 });
 
 
@@ -104,7 +111,7 @@ const dataFiles = [
 ]
 
 function filepath(fileName) {
-    return path.join(__dirname , 'data/'+ fileName +'.json');
+  return path.join(__dirname , 'data/'+ fileName +'.json');
 }
 
 

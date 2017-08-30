@@ -29,12 +29,34 @@ export const getServerData = filepath => {
 
 
 export const createData = (data, path) => {
-  return dispatch =>  {
+  return dispatch => {
     return dispatch({
       type: 'CREATE_DATA',
       payload: {
         promise: new Promise((resolve, rejected) => {
           axios.post('api/dungeon', {
+            data: data,
+            filepath: path,
+          })
+          .then(response => {
+            resolve(response.data)
+          })
+          .catch(error => {
+            rejected(error)
+          })
+        })
+      }
+    })
+  }
+}
+
+export const updateData = (data, path) => {
+  return dispatch => {
+    return dispatch({
+      type: 'UPDATE_DATA',
+      payload: {
+        promise: new Promise((resolve, rejected) => {
+          axios.put('api/dungeon', {
             data: data,
             filepath: path,
           })
@@ -50,18 +72,20 @@ export const createData = (data, path) => {
   }
 }
 
-export const updateData = (data, path) => {
-  return dispatch =>  {
+export const deleteData = (id, path) => {
+  return dispatch => {
     return dispatch({
-      type: 'UPDATE_DATA',
+      type: 'DELETE_DATA',
       payload: {
         promise: new Promise((resolve, rejected) => {
-          axios.put('api/dungeon', {
-            data: data,
-            filepath: path,
+          axios.delete('api/dungeon', {
+            data: {
+              id: id,
+              filepath: path,
+            }
           })
           .then(response => {
-            resolve(response)
+            resolve(response.data)
           })
           .catch(error => {
             rejected(error)

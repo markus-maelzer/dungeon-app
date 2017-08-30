@@ -4,6 +4,7 @@ const initialDataReducerState = {
   dataProps: [],
   fetchStatus: fetchStatusReducer(undefined, {}),
   toggleCreate: false,
+  toggleButtonLoader: false,
   searchBy: 'name',
 }
 
@@ -11,7 +12,6 @@ export function dataReducer(state = initialDataReducerState, action) {
   switch (action.type) {
     case 'TOGGLE_DETAILS':
     case 'TOGGLE_EDIT':
-    case 'CREATE_DATA':
     case 'UPDATE_DATA': {
       return {
         ...state,
@@ -19,10 +19,38 @@ export function dataReducer(state = initialDataReducerState, action) {
         filterData: handleDataReducer(state.filterData, action),
       }
     }
-    case 'TOGGLE_CREATE' : {
+    case 'TOGGLE_CREATE': {
       return {
         ...state,
         toggleCreate: !state.toggleCreate,
+      }
+    }
+
+    case 'CREATE_DATA_PENDING': {
+      return {
+        ...state,
+        toggleButtonLoader: !state.toggleButtonLoader,
+      }
+    }
+    case 'CREATE_DATA_FULFILLED': {
+      return {
+        ...state,
+        toggleCreate: !state.toggleCreate,
+        toggleButtonLoader: !state.toggleButtonLoader,
+        data: action.payload,
+        filterData: action.payload,
+      }
+    }
+
+    case 'DELETE_DATA_PENDING': {
+      return state;
+    }
+    case 'DELETE_DATA_FULFILLED': {
+      console.log(action.payload);
+      return {
+        ...state,
+        data: action.payload,
+        filterData: action.payload,
       }
     }
 
@@ -30,6 +58,13 @@ export function dataReducer(state = initialDataReducerState, action) {
       return {
         ...state,
         filterData: searchData(state, action),
+      }
+    }
+
+    case 'CHANGE_SEARCH_BY': {
+      return {
+        ...state,
+        searchBy: action.text,
       }
     }
 
@@ -140,8 +175,8 @@ function handleDataReducer(state, action) {
         ...state.slice(itemIndex +1, state.length),
       ];
     }
-    case 'CREATE_DATA': {
-
+    case 'CREATE_DATA_FULFILLED': {
+      return state.concat(action.payload[(action.payload.length - 1)]);
     }
 
     // Server Stuff
@@ -168,6 +203,9 @@ function createNewItem(oldItem, action) {
         ...oldItem,
         toggleEdit: !oldItem.toggleEdit
       };
+    }
+    default: {
+      return oldItem;
     }
   }
 }

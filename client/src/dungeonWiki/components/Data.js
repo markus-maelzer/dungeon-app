@@ -43,8 +43,10 @@ export const Data = (props) =>  (
             key={i}
             keyProp={i}
             itemData={item}
+            filepath={props.filepath}
             cToggleDetails={props.cToggleDetails}
             cToggleEdit={props.cToggleEdit}
+            deleteData={props.deleteData}
           />;
         }
 
