@@ -16,7 +16,7 @@ import promise from 'redux-promise-middleware';
 
 // import css files
 import './css/index.css';
-import './css/monster.css';
+import './css/wiki.css';
 
 // import Components
 import { ReduxContainer } from './dungeonWiki/DataContainer.js';
