@@ -27,9 +27,8 @@ export class CreateDataForm extends Component {
         formData[categorys[i]] = uuidv1();
       } else {
         formData[categorys[i]] = this.state[categorys[i]];
-      }      
+      }
     }
-    console.log(formData);
 
     // pass formData as a parameter to onFormSubmit
     if(this.props.className === 'create_monster') {

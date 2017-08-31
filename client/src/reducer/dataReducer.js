@@ -47,7 +47,6 @@ export function dataReducer(state = initialDataReducerState, action) {
     }
     case 'DELETE_DATA_FULFILLED':
     case 'UPDATE_DATA_FULFILLED':  {
-      console.log(action.payload);
       return {
         ...state,
         data: action.payload,
@@ -95,7 +94,6 @@ function searchData(state, action) {
   switch (action.type) {
     case 'SEARCH_DATA': {
       var updatedList = state.data;
-      console.log(state);
       var filter = state.searchBy;
 
       updatedList = updatedList.filter(item => {
@@ -195,7 +193,6 @@ function createNewItem(oldItem, action) {
       };
     }
     case 'TOGGLE_EDIT': {
-      console.log(oldItem);
       return {
         ...oldItem,
         toggleEdit: !oldItem.toggleEdit

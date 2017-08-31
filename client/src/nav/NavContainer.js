@@ -15,10 +15,7 @@ const NavBar = (props) => (
           <div></div>
           <div></div>
         </div>
-        <SearchBarContainer
-          /*searchForMonster={this.props.searchForMonster}
-          initialItems={this.props.initialItems}*/
-        />
+        <SearchBarContainer />
       </div>
       ) : (
         <div className='nav'>

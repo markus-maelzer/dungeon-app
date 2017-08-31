@@ -4,7 +4,7 @@ import { AddButton } from './AddButton';
 
 export class ToggleCreateDataForm extends Component {
   render() {
-    const item = {};
+    let item = {};
     if(this.props.itemData.length > 0) {
       this.props.itemData.forEach(prop => {
         switch (prop) {
