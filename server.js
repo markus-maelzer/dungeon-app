@@ -17,22 +17,21 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 server.listen(port, function () {
-  console.log('Server not running on port: ' + port);
+  console.log('Server definately not running on port: ' + port);
 });
 
 
 
-
-// in testing
 app.post('/api/filepath', (req, res) => {
-  DATA_FILE = filePath(req.body.filePath);
+  DATA_FILE = filepath(req.body.filepath);
   console.log('get/filepath: \n' + DATA_FILE);
+  res.json({success: 'success'})
 });
 
 
 let DATA_FILE = path.join(__dirname , 'data/monster.json');
 app.get('/api/dungeon', (req, res) => {
-  console.log('get/dungeon: \n' + DATA_FILE);
+//  console.log('get/dungeon: \n' + DATA_FILE);
   fs.readFile(DATA_FILE, (err, data) => {
     res.setHeader('Cache-Control', 'no-cache');
     res.json(JSON.parse(data));
@@ -40,7 +39,7 @@ app.get('/api/dungeon', (req, res) => {
 });
 
 app.post('/api/dungeon', (req, res) => {
-  const fileName = filePath(req.body.filePath);
+  const fileName = filepath(req.body.filepath);
   fs.readFile(fileName, (err, data) => {
     const monster = JSON.parse(data);
     const newMonster = createData(req.body.data);
@@ -54,22 +53,29 @@ app.post('/api/dungeon', (req, res) => {
 });
 
 app.put('/api/dungeon', (req, res) => {
-  const fileName = filePath(req.body.filePath);
+  const fileName = filepath(req.body.filepath);
   fs.readFile(fileName, (err, data) => {
     const monster = JSON.parse(data);
     const updatedData = updateData(req.body.data, monster);
 
     fs.writeFile(fileName, JSON.stringify(updatedData, null, 2), () => {
-      res.json({});
+      res.json(updatedData);
     });
   });
 });
 
 app.delete('/api/dungeon', (req, res) => {
-  const fileName = filePath(req.body.filePath);
+  const fileName = filepath(req.body.filepath);
   fs.readFile(fileName, (err, data) => {
-    const fileData = JSON.parse(data);
-  })
+    let fileData = JSON.parse(data);
+    fileData = fileData.filter(d => {
+      return d.id !== req.body.id;
+    });
+
+    fs.writeFile(fileName, JSON.stringify(fileData, null, 2), () => {
+      res.json(fileData);
+    });
+  });
 });
 
 
@@ -89,7 +95,15 @@ function updateData(req, attr) {
     // switch data from req body with the object data
     if (object.id === req.id) {
       Object.getOwnPropertyNames(object).forEach(prop => {
-        object[prop] = req[prop];
+        switch (prop) {
+          case 'toggleDetails':
+          case 'toggleEdit': {
+            return object[prop] = false;
+          }
+          default: {
+            return object[prop] = req[prop];
+          }
+        }
       });
     }
   });
@@ -104,8 +118,8 @@ const dataFiles = [
   'npcs'
 ]
 
-function filePath(fileName) {
-    return path.join(__dirname , 'data/'+ fileName +'.json');
+function filepath(fileName) {
+  return path.join(__dirname , 'data/'+ fileName +'.json');
 }
 
 

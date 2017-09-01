@@ -1,11 +1,13 @@
-    .monster-container {
+.data_container {
   padding: 50px 0;
 
-  .monster-list-container {
+  .data_list_container {
     width: 100%;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     align-items: start;
+    top: 20px;
+    padding-bottom: 60px;
   }
 }
 
@@ -36,10 +38,16 @@
     font-size: 16px;
   }
 }
-
 .form {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  align-items: flex-start;
+  align-content: flex-start;
+
   .category {
-    margin-bottom: 2px;
+    margin-bottom: 4px;
+    width: 100%;
 
     &:first-child {
       margin-top: 15px;
@@ -54,16 +62,14 @@
     }
 
     input:focus {
-      background-color: #a7e49d;
+      background-color: var(--mcl2);
     }
   }
 
   button {
     position: relative;
     width: 25%;
-    left: 50%;
     bottom: -15px;
-    transform: translateX(-50%);
     margin: 10px 0;
     margin-top: 0;
     padding: 5px;
@@ -77,6 +83,27 @@
     &:hover {
       background-color: var(--mcl2);
       color: white;
+    }
+  }
+}
+
+.create_monster {
+  width: 100%;
+  height: 100vh;
+  position: fixed;
+  top:0;
+  left: 0;
+  z-index: 1001;
+  margin: 0;
+  border-radius: 0;
+  border-color: transparent;
+
+  .category {
+    margin: 4px 4px;
+    width: 45%;
+
+    &:nth-child(2) {
+      margin-top: 15px;
     }
   }
 }
@@ -121,4 +148,5 @@
   width: 100%;
   height: 50px;
   background-color: var(--mcl);
+  z-index: 100;
 }
