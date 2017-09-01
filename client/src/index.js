@@ -20,6 +20,7 @@ import './css/wiki.css';
 
 // import Components
 import { ReduxContainer } from './dungeonWiki/DataContainer.js';
+import { LSContainer } from './login/LSContainer';
 import registerServiceWorker from './registerServiceWorker';
 
 const middleware = applyMiddleware(promise(), thunk, createLogger());
@@ -38,6 +39,7 @@ export class App extends Component {
             <Route exact path='/' render={(props) => (
               <ReduxContainer {...props} />
             )} />
+            <Route exact path='/login' component={LSContainer} />
             <Route exact path='/monster' render={(props) => (
               <ReduxContainer {...props} />
             )} />
