@@ -1,0 +1,4 @@
+LOGIN:
+http://docs.react-redux-firebase.com/history/v1.5.0/docs/auth.html
+
+firebase is dreck!:3

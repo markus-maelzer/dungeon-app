@@ -1,10 +1,23 @@
-import * as firebase from 'firebase';
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { firebaseConnect, pathToJS } from 'react-redux-firebase';
 
+@firebaseConnect()
+@connect(
+  ({ firebase }) => ({
+    authError: pathToJS(firebase, 'authError'),
+    auth: pathToJS(firebase, 'auth'),
+    profile: pathToJS(firebase, 'profile')
+  })
+)
 export class Login extends Component {
   state = {
     username: '',
     password: '',
+  }
+  handleLogout = (e) => {
+    e.preventDefault();
+    this.props.firebase.logout()
   }
   handleOnChange = (data) => (e) => {
     this.setState({
@@ -22,14 +35,12 @@ export class Login extends Component {
     }
   }
 
-  submitLogin = (mail, password) => {
-    firebase.auth().signInWithEmailAndPassword(mail, password).catch(error => {
-      //handle error
-      const errorCode = error.code;
-      const errorMessage = error.message;
-      console.log('code: ' + errorCode, 'message: ' + errorMessage);
+  submitLogin = (email, password) => {
+    console.log(password, email);
+    this.props.firebase.login({
+      email: email,
+      password: password
     })
-    console.log('hi');
   }
 
   render() {
@@ -51,6 +62,10 @@ export class Login extends Component {
           <button type='submit' onClick={this.handleSubmit}>
             Login
           </button>
+          <div>
+            {this.props.firebase.profile}
+            <button onClick={this.handleLogout}>Logout</button>
+          </div>
         </div>
       )
     }
