@@ -58,11 +58,13 @@
       border: none;
       outline: none;
       height: 23px;
-      transition: 0.25s;
+      transition: 1s;
+      padding: 0 12px;
     }
 
     input:focus {
       background-color: var(--mcl2);
+      border-radius: 8px;
     }
   }
 

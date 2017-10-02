@@ -5,6 +5,7 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { applyMiddleware, createStore, compose } from 'redux';
 import { BrowserRouter as Router, Route, Switch  } from 'react-router-dom';
+import { reactReduxFirebase } from 'react-redux-firebase';
 
 // import reducer
 import { reducer } from './reducer/MainReducer';
@@ -23,9 +24,19 @@ import { ReduxContainer } from './dungeonWiki/DataContainer.js';
 import { LSContainer } from './login/LSContainer';
 import registerServiceWorker from './registerServiceWorker';
 
+// import firebase inits
+import { firebaseConfig, config } from './firebase/database';
+//import { initAuth } from './firebase/auth';
+
 const middleware = applyMiddleware(promise(), thunk, createLogger());
 
-const store = createStore(
+// createStore function with firebase redux module
+const createStoreWithFirebase = compose(
+  reactReduxFirebase(firebaseConfig, config)
+)(createStore)
+
+// use createStoreWithFirebase function to create the store
+const store = createStoreWithFirebase(
   reducer,
   compose(middleware, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__())
 );

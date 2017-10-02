@@ -15,7 +15,7 @@ const submitSignIn = (username, password, email) => (
 
 const mapToStateLSContainer = (state) => (
   {
-    toggleLS: state.lsReducer.toggleLS,
+    toggleLS: state.loginReducer.toggleLS,
   }
 )
 
