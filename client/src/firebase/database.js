@@ -11,6 +11,7 @@ export const config = {
   userProfile: 'users',
   enableLogging: false,
 }
+
 /*
 firebase.initializeApp(config);
 database = firebase.database();
