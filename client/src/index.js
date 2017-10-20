@@ -5,7 +5,8 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { applyMiddleware, createStore, compose } from 'redux';
 import { BrowserRouter as Router, Route, Switch  } from 'react-router-dom';
-import { reactReduxFirebase } from 'react-redux-firebase';
+import { reactReduxFirebase  } from 'react-redux-firebase';
+import * as firebase from 'firebase';
 
 // import reducer
 import { reducer } from './reducer/MainReducer';
@@ -25,20 +26,23 @@ import { LSContainer } from './login/LSContainer';
 import registerServiceWorker from './registerServiceWorker';
 
 // import firebase inits
-import { firebaseConfig, config } from './firebase/database';
+import { firebaseConfig, config } from './firebase/fbConfig';
 //import { initAuth } from './firebase/auth';
+
+// init firebase
+firebase.initializeApp(firebaseConfig);
 
 const middleware = applyMiddleware(promise(), thunk, createLogger());
 
-// createStore function with firebase redux module
-const createStoreWithFirebase = compose(
-  reactReduxFirebase(firebaseConfig, config)
-)(createStore)
 
 // use createStoreWithFirebase function to create the store
-const store = createStoreWithFirebase(
+const store = createStore(
   reducer,
-  compose(middleware, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__())
+  compose(
+    reactReduxFirebase(firebase, config),
+    middleware,
+    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+  )
 );
 
 export class App extends Component {
