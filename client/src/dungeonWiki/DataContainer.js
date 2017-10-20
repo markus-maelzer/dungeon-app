@@ -9,6 +9,14 @@ import { NavContainer } from '../nav/NavContainer';
 import { DataList } from './components/DataList';
 import { ToggleCreateDataForm } from './components/ToggleCreateDataForm';
 
+import {firebaseConnect} from 'react-redux-firebase';
+
+@firebaseConnect(['monster'])
+@connect(
+  ({firebase: {data: {monster}} }) => ({
+    monster
+  })
+)
 
 export class DataContainer extends Component {
   componentWillMount() {
@@ -19,6 +27,9 @@ export class DataContainer extends Component {
     if(nextProps.filepath !== this.props.filepath) {
       this.props.getServerData(nextProps.filepath);
     }
+  }
+  componentDidMount() {
+    console.dir(this.props);
   }
 
   render() {
