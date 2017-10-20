@@ -2,5 +2,11 @@ LOGIN:
 http://docs.react-redux-firebase.com/history/v1.5.0/docs/auth.html
 
 // fbConfig === firebase configuration
-// index has updated 
+// index has updated
 // testing done in DataContainer
+
+
+--Backend auf Firebase umstellen--
+
+- firebase connection and inititalization --
+- add, remove, update, getData actions in firebase
